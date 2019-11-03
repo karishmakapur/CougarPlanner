@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.myfirstapp.DashboardFragment"
-        android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_scheduleFragment"
             app:destination="@id/scheduleFragment" />
@@ -17,11 +17,11 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.myfirstapp.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/scheduleFragment"
         android:name="com.example.myfirstapp.ScheduleFragment"
-        android:label="fragment_schedule"
+        android:label="Schedule"
         tools:layout="@layout/fragment_schedule" />
 </navigation>
