@@ -5,7 +5,37 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".ProfileFragment">
+
+    <ImageButton
+        android:id="@+id/ProfilePicImageButton"
+        android:layout_width="120dp"
+        android:layout_height="104dp"
+        android:background="@drawable/propic"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.115" />
+
+    <TextView
+        android:id="@+id/NameTextView"
+        android:layout_width="106dp"
+        android:layout_height="26dp"
+        android:text="@string/users_name"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/middleNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePicImageButton"
+        app:layout_constraintVertical_bias="0.31" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -22,18 +52,44 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/DashboardTextView"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/HeadingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profile"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="153dp"
         tools:layout_editor_absoluteY="442dp" />
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="489dp"
+        android:layout_height="335dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_weight="1"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.769"
+        app:navGraph="@navigation/profile_navigation" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/middleNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#63A39A"
+        app:layout_constraintBottom_toTopOf="@+id/fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/profile_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
