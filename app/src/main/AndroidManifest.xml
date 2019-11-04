@@ -9,7 +9,10 @@
         android:roundIcon="@drawable/cougarplanner"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".AddCourseActivity" />
+        <activity android:name=".AddFriendActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

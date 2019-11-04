@@ -16,8 +16,15 @@
     <string name="edit_profie">Edit Profie</string>
     <string name="todo">TODO</string>
     <string name="users_name">Users Name</string>
-    <string name="friends">Friends</string>
-    <string name="courses">Courses</string>
     <string name="friend_fragment">Friend Fragment</string>
     <string name="course_fragment">Course Fragment</string>
+    <string name="friends">Friends</string>
+    <string name="courses">Courses</string>
+    <string name="friendName">Friend Name</string>
+    <string name="courseName">Course Name</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="search_user">Search User</string>
+    <string name="add_course">Add Course</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save_profile">Save Profile</string>
 </resources>
