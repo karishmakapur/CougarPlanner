@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TODO: ask user for their email, name, username, password, date of birth, university
+    // name, current year at the university, and expected graduation date. Add info to their profile database
     EditText emailId, password;
     Button btnSignUp;
     TextView tvSignIn;
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else{
                                 //if creating account is successful, then send them to the home screen to
-                                startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                                startActivity(new Intent(MainActivity.this, FillProfileActivity.class));
                             }
                         }
                     });

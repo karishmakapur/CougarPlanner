@@ -50,6 +50,13 @@ public class ProfileFragment extends Fragment {
         ViewFriendButton = view.findViewById(R.id.friendButton);
         ViewCourseButton = view.findViewById(R.id.courseButton);
 
+
+        //setting default to show the list of friends
+        if (CourseScrollView.getVisibility() == View.VISIBLE) {
+            FriendScrollView.setVisibility(View.VISIBLE);
+            CourseScrollView.setVisibility(View.INVISIBLE);
+        }
+
         //handle image button
         profilePictureImageButton.setOnClickListener(new View.OnClickListener() {
 

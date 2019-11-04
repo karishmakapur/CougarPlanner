@@ -27,4 +27,28 @@
     <string name="add_course">Add Course</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="save_profile">Save Profile</string>
+    <string name="username">Username</string>
+    <string name="name">Name:</string>
+    <string name="usernamedot">Username:</string>
+    <string name="nameinput">Name</string>
+    <string name="graduation_date">Graduation Date</string>
+    <string name="graduation_datedot">Graduation Date:</string>
+    <string name="currentyear">CurrentYear</string>
+    <string name="current_year">Current Year:</string>
+    <string name="university">University</string>
+    <string name="date_of_birth">Date Of Birth:</string>
+    <string name="universitydot">University:</string>
+    <string name="dob">DOB:</string>
+    <string name="password">Password</string>
+    <string name="passworddot">Password:</string>
+    <string name="your_profile">Your Profile</string>
+    <string-array name="Colors">
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+        <item>Red</item>
+        <item>Purple</item>
+        <item>Pink</item>
+    </string-array>
 </resources>

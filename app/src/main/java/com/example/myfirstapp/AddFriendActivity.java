@@ -28,5 +28,8 @@ public class AddFriendActivity extends AppCompatActivity {
                 startActivity(intToHome);
             }
         });
+
+        //TODO: connect search bar to database for querying when a user wants to search for a friend and then add them.
+        //TODO: When user searches for user, and if user exists, then display user with the option to send friend request
     }
 }
