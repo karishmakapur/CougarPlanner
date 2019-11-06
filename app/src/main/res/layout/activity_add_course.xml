@@ -6,57 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".AddCourseActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/HeadingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_course"
-        android:textAllCaps="true"
-        android:textColor="#FFFFFF"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="36dp"
-        android:layout_height="40dp"
-        android:background="@drawable/baseline_arrow_back_ios_black_18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toStartOf="@+id/HeadingTextView"
-        app:layout_constraintHorizontal_bias="0.301"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/PromptAddCourseTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please fill out the following fields:"
+        android:text="@string/please_fill_out_the_following_fields"
         android:textAllCaps="true"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.055" />
 
     <Spinner
         android:id="@+id/ColorSpinner"
@@ -68,16 +31,16 @@
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.882"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintVertical_bias="0.779" />
 
     <TextView
         android:id="@+id/ColorTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Color:"
+        android:text="@string/color"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +53,7 @@
         android:id="@+id/InstructorTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instructor:"
+        android:text="@string/instructor"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +66,7 @@
         android:id="@+id/NameofCourseTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name of Course:"
+        android:text="@string/name_of_course"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +79,7 @@
         android:id="@+id/MeetingDaysTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meeting Days:"
+        android:text="@string/meeting_days_dot"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,13 +95,14 @@
         android:bufferType="editable"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name Of Course"
+        android:text="@string/name_of_course_input"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.247"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editMeetingDays"
@@ -147,13 +111,14 @@
         android:bufferType="editable"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Meeting Days"
+        android:text="@string/meeting_days"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
+        app:layout_constraintVertical_bias="0.423"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editInstructorName"
@@ -162,23 +127,38 @@
         android:bufferType="editable"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Instructor Name"
+        android:text="@string/instructor_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintVertical_bias="0.609"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/submitCourseButton"
         android:layout_width="95dp"
         android:layout_height="48dp"
         android:background="#A3DDB0"
-        android:text="Add Course"
+        android:text="@string/add_course"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.155"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.916" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="95dp"
+        android:layout_height="48dp"
+        android:background="#A3DDB0"
+        android:text="@string/cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.756"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.916" />
 </androidx.constraintlayout.widget.ConstraintLayout>

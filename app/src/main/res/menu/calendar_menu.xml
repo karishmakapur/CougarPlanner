@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/daily"
+        android:title="@string/daily_view"
+        android:visible="true"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/weekly"
+        android:title="@string/weekly_view"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/monthly"
+        android:title="@string/monthly_view"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/semesterly"
+        android:title="@string/semesterly_view"
+        android:visible="true"
+        app:showAsAction="never" />
+</menu>

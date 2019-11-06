@@ -19,7 +19,43 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintVertical_bias="0.052" />
+
+    <Button
+        android:id="@+id/addFriendButton"
+        android:layout_width="48dp"
+        android:layout_height="33dp"
+        android:background="@drawable/round_person_add_black_18dp"
+        app:layout_constraintBottom_toTopOf="@+id/courseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toEndOf="@+id/ProfilePicImageButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331" />
+
+    <Button
+        android:id="@+id/AddCourseButton"
+        android:layout_width="48dp"
+        android:layout_height="33dp"
+        android:background="@drawable/round_library_add_black_18dp"
+        app:layout_constraintBottom_toTopOf="@+id/courseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toEndOf="@+id/ProfilePicImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/addFriendButton"
+        app:layout_constraintVertical_bias="0.317" />
+
+    <Button
+        android:id="@+id/EditProfileButton"
+        android:layout_width="48dp"
+        android:layout_height="33dp"
+        android:background="@drawable/baseline_edit_black_18dp"
+        app:layout_constraintBottom_toTopOf="@+id/friendButton"
+        app:layout_constraintEnd_toStartOf="@+id/ProfilePicImageButton"
+        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331" />
 
     <TextView
         android:id="@+id/NameTextView"
@@ -34,36 +70,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfilePicImageButton"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#2196F3"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/HeadingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/profile"
-        android:textAllCaps="true"
-        android:textColor="#FFFFFF"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="442dp" />
+        app:layout_constraintVertical_bias="0.02" />
 
     <Button
         android:id="@+id/friendButton"
@@ -75,7 +82,7 @@
         app:layout_constraintEnd_toStartOf="@id/courseButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameTextView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.897" />
 
     <Button
         android:id="@+id/courseButton"
@@ -89,12 +96,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/friendButton"
         app:layout_constraintTop_toBottomOf="@+id/NameTextView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.897" />
 
     <ScrollView
         android:id="@+id/FriendScrollView"
-        android:layout_width="408dp"
-        android:layout_height="368dp"
+        android:layout_width="418dp"
+        android:layout_height="353dp"
         android:background="#000F39CF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +159,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/FriendTextView5"
+                android:id="@+id/FriendTextView6"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#9CA9C4"
@@ -163,7 +170,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/FriendTextView6"
+                android:id="@+id/FriendTextView5"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="#9CA9C4"
@@ -221,8 +228,8 @@
 
     <ScrollView
         android:id="@+id/CourseScrollView"
-        android:layout_width="408dp"
-        android:layout_height="368dp"
+        android:layout_width="418dp"
+        android:layout_height="353dp"
         android:background="#000F39CF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -346,41 +353,5 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/addFriendButton"
-        android:layout_width="48dp"
-        android:layout_height="33dp"
-        android:background="@drawable/round_person_add_black_18dp"
-        app:layout_constraintBottom_toTopOf="@+id/courseButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toEndOf="@+id/ProfilePicImageButton"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.11" />
-
-    <Button
-        android:id="@+id/AddCourseButton"
-        android:layout_width="48dp"
-        android:layout_height="33dp"
-        android:background="@drawable/round_library_add_black_18dp"
-        app:layout_constraintBottom_toTopOf="@+id/courseButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.836"
-        app:layout_constraintStart_toEndOf="@+id/ProfilePicImageButton"
-        app:layout_constraintTop_toBottomOf="@+id/addFriendButton"
-        app:layout_constraintVertical_bias="0.384" />
-
-    <Button
-        android:id="@+id/EditProfileButton"
-        android:layout_width="48dp"
-        android:layout_height="33dp"
-        android:background="@drawable/baseline_edit_black_18dp"
-        app:layout_constraintBottom_toTopOf="@+id/friendButton"
-        app:layout_constraintEnd_toStartOf="@+id/ProfilePicImageButton"
-        app:layout_constraintHorizontal_bias="0.284"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.111" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
