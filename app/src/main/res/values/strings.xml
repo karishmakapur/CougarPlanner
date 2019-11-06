@@ -57,6 +57,7 @@
     <string name="meeting_days_dot">Meeting Days:</string>
     <string name="name_of_course_input">Name Of Course</string>
     <string name="add_course">Add Course</string>
+    <string name="change_view" />
     <string-array name="Colors">
         <item>Blue</item>
         <item>Green</item>
@@ -65,5 +66,13 @@
         <item>Red</item>
         <item>Purple</item>
         <item>Pink</item>
+    </string-array>
+
+    <string-array name="ViewSchedule">
+        <item>Change View</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Semesterly</item>
     </string-array>
 </resources>

@@ -1,9 +1,12 @@
 package com.example.myfirstapp;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,7 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +34,7 @@ public class ScheduleFragment extends Fragment {
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String date;
-    //private Button viewMenuButton;
+    Spinner viewScheduleSpinner;
 
     public ScheduleFragment() {
         // Required empty public constructor
@@ -50,47 +55,55 @@ public class ScheduleFragment extends Fragment {
         date = dateFormat.format(calendar.getTime());
         currentDateTV.setText(date);
 
-        //getting the reference to the view menu button
-       /* viewMenuButton = v.findViewById(R.id.ViewMenu);
+        //getting reference to spinner
+        viewScheduleSpinner = v.findViewById(R.id.viewSpinner);
 
-        viewMenuButton.setOnClickListener(new View.OnClickListener() {
+        //populate spinner with correct data
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.ViewSchedule));
+       adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       viewScheduleSpinner.setAdapter(adapter);
+
+
+        //handling the spinner events
+        viewScheduleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onClick(View v) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String selectedClass = parent.getItemAtPosition(position).toString();
+
+                if(selectedClass.equals("Daily"))
+                {
+                    Toast.makeText(getActivity(), "You clicked Daily!", Toast.LENGTH_SHORT).show();
+                    Intent intToDaily = new Intent(getActivity(),DailyActivity.class);
+                    startActivity(intToDaily);
+                }
+                else if (selectedClass.equals("Weekly")) {
+                    Toast.makeText(getActivity(), "You clicked Weekly!", Toast.LENGTH_SHORT).show();
+                    Intent intToWeekly = new Intent(getActivity(),WeeklyActivity.class);
+                    startActivity(intToWeekly);
+                }
+                else if(selectedClass.equals("Monthly")) {
+                    Toast.makeText(getActivity(), "You clicked Monthly!", Toast.LENGTH_SHORT).show();
+                    Intent intToMonthly = new Intent(getActivity(),MonthlyActivity.class);
+                    startActivity(intToMonthly);
+                }
+                else if(selectedClass.equals("Semesterly")) {
+                    Toast.makeText(getActivity(), "You clicked Semesterly!", Toast.LENGTH_SHORT).show();
+                    Intent intToSemesterly = new Intent(getActivity(),SemesterlyActivity.class);
+                    startActivity(intToSemesterly);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-*/
+
         return v;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.calendar_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //menu item click handling
-        if(id == R.id.daily)
-        {
-            Toast.makeText(getActivity(), "Daily clicked", Toast.LENGTH_SHORT).show();
-        }
-        else if(id == R.id.weekly)
-        {
-            Toast.makeText(getActivity(), "Weekly clicked", Toast.LENGTH_SHORT).show();
-        }
-        else if(id == R.id.monthly)
-        {
-            Toast.makeText(getActivity(), "Monthly clicked", Toast.LENGTH_SHORT).show();
-        }
-        else if(id == R.id.semesterly)
-        {
-            Toast.makeText(getActivity(), "Semesterly clicked", Toast.LENGTH_SHORT).show();
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

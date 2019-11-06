@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="353dp"
+        android:layout_width="355dp"
         android:layout_height="54dp"
         android:background="#75A4E9"
         android:gravity="center"
@@ -151,6 +151,19 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <Spinner
+        android:id="@+id/viewSpinner"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:prompt="@string/change_view"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.887"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.079" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
