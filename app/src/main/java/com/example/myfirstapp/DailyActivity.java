@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ public class DailyActivity extends AppCompatActivity {
 
     ActionBar actionBar;
     Spinner viewScheduleSpinner;
+    Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class DailyActivity extends AppCompatActivity {
 
         //getting reference to spinner
         viewScheduleSpinner = findViewById(R.id.viewSpinner);
+        backButton = findViewById(R.id.backButton);
 
         //populate spinner with correct data
         ArrayAdapter<String> adapter =
@@ -75,6 +78,15 @@ public class DailyActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Toast.makeText(DailyActivity.this, "You clicked the back button!", Toast.LENGTH_SHORT).show();
+                Intent intToHome = new Intent(DailyActivity.this,HomeActivity.class);
+                startActivity(intToHome);
             }
         });
     }

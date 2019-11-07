@@ -15,9 +15,5 @@
         android:name="com.example.myfirstapp.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/scheduleFragment"
-        android:name="com.example.myfirstapp.ScheduleFragment"
-        android:label="Schedule"
-        tools:layout="@layout/fragment_schedule" />
+
 </navigation>
