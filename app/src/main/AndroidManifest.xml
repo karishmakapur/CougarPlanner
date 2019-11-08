@@ -9,10 +9,9 @@
         android:roundIcon="@drawable/cougarplanner"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".DailyActivity" />
-        <activity android:name=".SemesterlyActivity" />
-        <activity android:name=".MonthlyActivity" />
-        <activity android:name=".WeeklyActivity" />
+        <activity android:name=".AddTaskActivity"></activity>
+        <activity android:name=".ViewActivity" />
+        <activity android:name=".ScheduleActivity" />
         <activity android:name=".FillProfileActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".AddCourseActivity" />
