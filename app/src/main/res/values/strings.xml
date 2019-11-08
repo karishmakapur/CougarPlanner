@@ -59,6 +59,7 @@
     <string name="add_course">Add Course</string>
     <string name="change_view" />
     <string-array name="Colors">
+        <item>Color</item>
         <item>Blue</item>
         <item>Green</item>
         <item>Yellow</item>
@@ -68,11 +69,10 @@
         <item>Pink</item>
     </string-array>
 
-    <string-array name="ViewSchedule">
-        <item>Change View</item>
-        <item>Daily</item>
-        <item>Weekly</item>
-        <item>Monthly</item>
-        <item>Semesterly</item>
+    <string-array name="PriorityLevel">
+        <item>Priority Level</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
     </string-array>
 </resources>

@@ -18,15 +18,132 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is where tasks can go. Pls design the format."
+    <ScrollView
+        android:id="@+id/taskScrollView"
+        android:layout_width="361dp"
+        android:layout_height="391dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/taskTextView2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView4"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView6"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView5"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView7"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView8"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView9"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taskTextView10"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#9CA9C4"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/task_here"
+                android:textAllCaps="true"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
