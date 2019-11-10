@@ -23,20 +23,20 @@
 
     <Button
         android:id="@+id/addFriendButton"
-        android:layout_width="48dp"
-        android:layout_height="33dp"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
         android:background="@drawable/round_person_add_black_18dp"
         app:layout_constraintBottom_toTopOf="@+id/courseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.836"
         app:layout_constraintStart_toEndOf="@+id/ProfilePicImageButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintVertical_bias="0.191" />
 
     <Button
         android:id="@+id/AddCourseButton"
-        android:layout_width="48dp"
-        android:layout_height="33dp"
+        android:layout_width="34dp"
+        android:layout_height="28dp"
         android:background="@drawable/round_library_add_black_18dp"
         app:layout_constraintBottom_toTopOf="@+id/courseButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,15 +47,27 @@
 
     <Button
         android:id="@+id/EditProfileButton"
-        android:layout_width="48dp"
-        android:layout_height="33dp"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
         android:background="@drawable/baseline_edit_black_18dp"
         app:layout_constraintBottom_toTopOf="@+id/friendButton"
         app:layout_constraintEnd_toStartOf="@+id/ProfilePicImageButton"
         app:layout_constraintHorizontal_bias="0.284"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.331" />
+        app:layout_constraintVertical_bias="0.191" />
+
+    <Button
+        android:id="@+id/LogoutButton"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:background="@drawable/round_logout"
+        app:layout_constraintBottom_toTopOf="@+id/friendButton"
+        app:layout_constraintEnd_toStartOf="@+id/ProfilePicImageButton"
+        app:layout_constraintHorizontal_bias="0.284"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditProfileButton"
+        app:layout_constraintVertical_bias="0.31" />
 
     <TextView
         android:id="@+id/NameTextView"

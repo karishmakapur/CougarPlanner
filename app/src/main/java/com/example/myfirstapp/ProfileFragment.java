@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class ProfileFragment extends Fragment {
 
@@ -22,6 +24,7 @@ public class ProfileFragment extends Fragment {
     Button ViewCourseButton;
     Button addFriendButton;
     Button addCourseButton;
+    Button logoutButton;
     Button editProfileButton;
 
     ImageButton profilePictureImageButton;
@@ -50,6 +53,7 @@ public class ProfileFragment extends Fragment {
         editProfileButton = view.findViewById(R.id.EditProfileButton);
         ViewFriendButton = view.findViewById(R.id.friendButton);
         ViewCourseButton = view.findViewById(R.id.courseButton);
+        logoutButton = view.findViewById(R.id.LogoutButton);
 
 
         //setting default to show the list of friends
@@ -120,7 +124,29 @@ public class ProfileFragment extends Fragment {
                 startActivity(intToEditProfile);
             }
         });
+
+        //handle logout button
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+
         return view;
+
+    }
+
+
+    //signout function called from logout button
+    private void signOut() {
+        if (FirebaseAuth.getInstance() != null) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intToLogin = new Intent(getActivity(), LoginActivity.class);
+            Toast.makeText(getActivity(),"You are logged out", Toast.LENGTH_SHORT).show();
+            startActivity(intToLogin);
+        }
+
 
     }
 

@@ -1,10 +1,12 @@
 package com.example.myfirstapp;
 
+
 public class Course {
     private String CourseName;
     private String MeetingDays;
     private String Instructor;
     private String Color;
+
     public Course(){
 
     }

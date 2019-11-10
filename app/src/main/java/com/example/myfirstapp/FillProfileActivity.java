@@ -10,6 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -18,7 +24,6 @@ public class FillProfileActivity extends AppCompatActivity {
     Button saveButton;
     ActionBar actionBar;
     EditText nameET;
-    EditText passwordET;
     EditText dobET;
     EditText UniET;
     EditText CurYearET;
@@ -41,7 +46,6 @@ public class FillProfileActivity extends AppCompatActivity {
         //creating references
         saveButton = findViewById(R.id.saveProfileButton);
         nameET = findViewById(R.id.editName);
-        passwordET = findViewById(R.id.editPassword);
         dobET = findViewById(R.id.editDateOfBirth);
         UniET = findViewById(R.id.editUniversity);
         CurYearET = findViewById(R.id.editCurrentYear);
@@ -50,12 +54,13 @@ public class FillProfileActivity extends AppCompatActivity {
 
 
         //handle save button
-        // TODO: update the users information in the database upon save
+        // update the users information in the database upon save
         // TODO: add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //Toast.makeText(FillProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FillProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
+
 
                 User user = new User();
                 user.setName(nameET.getText().toString());
@@ -64,7 +69,6 @@ public class FillProfileActivity extends AppCompatActivity {
                 user.setGradyr(GradYearET.getText().toString());
                 user.setCurrYear(CurYearET.getText().toString());
                 user.setUniname(UniET.getText().toString());
-                user.setPassword(passwordET.getText().toString());
 
 
                 new FirebaseDatabaseHelperUser().addUser(user, new FirebaseDatabaseHelperUser.UserStatus() {

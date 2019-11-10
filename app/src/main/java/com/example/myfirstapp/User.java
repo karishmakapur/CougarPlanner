@@ -1,10 +1,8 @@
 package com.example.myfirstapp;
 
-import java.util.Date;
 
 public class User {
     private String name;
-    private String password;
     private String uniname;
     private String email;
     private String dob;
@@ -14,13 +12,13 @@ public class User {
     public User() {
     }
 
-    public User(String name, String password, String uniname, String email, String dob, String gradyr) {
+    public User(String name, String uniname, String email, String dob, String gradyr, String currYear, String username) {
         this.name = name;
-        this.password = password;
         this.uniname = uniname;
         this.email = email;
         this.dob = dob;
         this.gradyr = gradyr;
+        this.currYear = currYear;
     }
 
     public String getName() {
@@ -29,14 +27,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getUniname() {
@@ -78,4 +68,6 @@ public class User {
     public void setCurrYear(String currYear) {
         this.currYear = currYear;
     }
+
+
 }

@@ -30,15 +30,15 @@
 
     <Button
         android:id="@+id/addTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Task Button"
+        android:layout_width="45dp"
+        android:layout_height="39dp"
+        android:background="@drawable/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.128" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

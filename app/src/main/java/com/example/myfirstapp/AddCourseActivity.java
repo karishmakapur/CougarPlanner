@@ -45,6 +45,7 @@ public class AddCourseActivity extends AppCompatActivity {
         meetingDaysET = findViewById(R.id.editMeetingDays);
         instructorET = findViewById(R.id.editInstructorName);
 
+
         //handle back button
         cancelButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -62,7 +63,7 @@ public class AddCourseActivity extends AppCompatActivity {
         colorSpinner.setAdapter(adapter);
 
         //handling users request to add a course
-        //TODO: When user clicks the "Add course" button, add the course to the users database
+        //When user clicks the "Add course" button, add the course to the users database
         submitCourse.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

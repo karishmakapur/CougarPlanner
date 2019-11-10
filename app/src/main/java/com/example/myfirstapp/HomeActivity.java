@@ -45,30 +45,9 @@ public class HomeActivity extends AppCompatActivity {
         //Setting up the action bar
         NavigationUI.setupActionBarWithNavController(this, navController);
 
-        //logout button clicked
-        /*logoutButton = findViewById(R.id.LogoutButton);
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-            }
-        });
-        */
-
-
     }
 
-    private void signOut() {
-        if (FirebaseAuth.getInstance() != null) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intToLogin = new Intent(HomeActivity.this, LoginActivity.class);
-            Toast.makeText(HomeActivity.this,"You are logged out", Toast.LENGTH_SHORT).show();
-            startActivity(intToLogin);
-        }
 
-
-    }
 
     //Setting Up the back button
     @Override
