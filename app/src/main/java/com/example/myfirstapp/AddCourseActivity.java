@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class AddCourseActivity extends AppCompatActivity {
 
@@ -19,6 +22,9 @@ public class AddCourseActivity extends AppCompatActivity {
     Spinner colorSpinner;
     Button submitCourse;
     ActionBar actionBar;
+    EditText courseNameET;
+    EditText meetingDaysET;
+    EditText instructorET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,9 @@ public class AddCourseActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
         colorSpinner = findViewById(R.id.ColorSpinner);
         submitCourse = findViewById(R.id.submitCourseButton);
+        courseNameET = findViewById(R.id.editNameOfCourse);
+        meetingDaysET = findViewById(R.id.editMeetingDays);
+        instructorET = findViewById(R.id.editInstructorName);
 
         //handle back button
         cancelButton.setOnClickListener(new View.OnClickListener(){
@@ -58,6 +67,38 @@ public class AddCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Toast.makeText(AddCourseActivity.this, "You clicked the submit a course button!", Toast.LENGTH_SHORT).show();
+
+
+                Course course = new Course();
+                course.setColor(colorSpinner.getSelectedItem().toString());
+                course.setCourseName(courseNameET.getText().toString());
+                course.setInstructor(instructorET.getText().toString());
+                course.setMeetingDays(meetingDaysET.getText().toString());
+
+                new FirebaseDatabaseHelperCourse().addCourse(course, new FirebaseDatabaseHelperCourse.CourseStatus(){
+                    @Override
+                    public void CourseIsLoaded(List<Course> courses, List<String> keys) {
+
+                    }
+
+
+                    @Override
+                    public void CourseIsInserted() {
+
+                    }
+
+                    @Override
+                    public void DataIsUpdated() {
+
+                    }
+
+                    @Override
+                    public void DataIsDeleted() {
+
+                    }
+                });
+
+
                 Intent intToHome = new Intent(AddCourseActivity.this, HomeActivity.class);
                 startActivity(intToHome);
             }

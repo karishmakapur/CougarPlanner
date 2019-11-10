@@ -194,7 +194,7 @@
         android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/editExpectedGraduationDate"
+        android:id="@+id/editExpectedGraduationYear"
         android:layout_width="201dp"
         android:layout_height="46dp"
         android:bufferType="editable"
