@@ -1,6 +1,18 @@
 package com.example.myfirstapp;
 
 
+import android.util.Log;
+import android.view.View;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String name;
     private String uniname;
@@ -8,6 +20,7 @@ public class User {
     private String dob;
     private String gradyr;
     private String currYear;
+    ArrayList<User> allUsers = new ArrayList<>();
 
     public User() {
     }
@@ -68,6 +81,7 @@ public class User {
     public void setCurrYear(String currYear) {
         this.currYear = currYear;
     }
+
 
 
 }

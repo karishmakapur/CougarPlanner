@@ -3,8 +3,8 @@ package com.example.myfirstapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.ui.NavigationUI;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +12,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class ProfileFragment extends Fragment {
@@ -22,14 +29,20 @@ public class ProfileFragment extends Fragment {
 
     Button ViewFriendButton;
     Button ViewCourseButton;
-    Button addFriendButton;
+    Button searchFriendButton;
     Button addCourseButton;
     Button logoutButton;
     Button editProfileButton;
+    TextView usersName;
+
 
     ImageButton profilePictureImageButton;
     ScrollView FriendScrollView;
     ScrollView CourseScrollView;
+
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser mFirebaseUser;
+    private DatabaseReference databaseReference;
 
     public ProfileFragment() {
     }
@@ -48,12 +61,40 @@ public class ProfileFragment extends Fragment {
         profilePictureImageButton = view.findViewById(R.id.ProfilePicImageButton);
         FriendScrollView = view.findViewById(R.id.FriendScrollView);
         CourseScrollView = view.findViewById(R.id.CourseScrollView);
-        addFriendButton = view.findViewById(R.id.addFriendButton);
+        searchFriendButton = view.findViewById(R.id.addFriendButton);
         addCourseButton = view.findViewById(R.id.AddCourseButton);
         editProfileButton = view.findViewById(R.id.EditProfileButton);
         ViewFriendButton = view.findViewById(R.id.friendButton);
         ViewCourseButton = view.findViewById(R.id.courseButton);
         logoutButton = view.findViewById(R.id.LogoutButton);
+        usersName = view.findViewById(R.id.NameTextView);
+
+        firebaseAuth = FirebaseAuth.getInstance() ;
+        mFirebaseUser = firebaseAuth.getCurrentUser();
+        String uid = firebaseAuth.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users/" + uid);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String name = dataSnapshot.child("name").getValue().toString();
+
+                    usersName.setText(name);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
 
 
         //setting default to show the list of friends
@@ -95,11 +136,11 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        //handle add friend button
-        addFriendButton.setOnClickListener(new View.OnClickListener(){
+        //handle search / add friend button
+        searchFriendButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(getActivity(), "You clicked the add friend button!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "You clicked the search/add friend button!", Toast.LENGTH_SHORT).show();
                 Intent intToAddFriend = new Intent(getActivity(),AddFriendActivity.class);
                 startActivity(intToAddFriend);
             }

@@ -58,6 +58,7 @@
     <string name="name_of_course_input">Name Of Course</string>
     <string name="add_course">Add Course</string>
     <string name="change_view" />
+    <string name="email">Email</string>
     <string-array name="Colors">
         <item>Color</item>
         <item>Blue</item>
@@ -75,4 +76,6 @@
         <item>Medium</item>
         <item>High</item>
     </string-array>
+    
+
 </resources>
