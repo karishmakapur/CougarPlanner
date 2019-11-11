@@ -98,7 +98,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
             }
         });
 
-        /*
+
         //handling users request to add a course
         //When user clicks the "Add Task" button, add the task to the users database and connect to course
         //TODO: error handling: if user enters course that doesn't exist: our app creates the course. But it should also tell user they need to create course
@@ -114,16 +114,16 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                 task.setPriorityLevel(changepriority.getSelectedItem().toString());
                 task.setNotes(editnotes.getText().toString());
 
-                databaseReference.child("tasks/" + uid + "/" + task.getTaskName() + "/priorityLevel").setValue(changepriority.toString());
-                databaseReference.child("tasks/" + uid + "/" + task.getTaskName() + "notes").setValue(editnotes.toString());
-                databaseReference.child("tasks/" + uid + "/" + task.getTaskName() + "dueDate").setValue(editduedate.toString());
-                databaseReference.child("tasks/" + uid + "/" + task.getTaskName() + "course").setValue(editCoursename.toString());
+                databaseReference.child("priorityLevel").setValue(changepriority.getSelectedItem().toString());
+                databaseReference.child("notes").setValue(editnotes.getText().toString());
+                databaseReference.child("dueDate").setValue(editduedate.getText().toString());
+                databaseReference.child("course").setValue(editCoursename.getText().toString());
 
                 Intent intToHome = new Intent(ViewEditTaskActivity.this, ScheduleActivity.class);
                 startActivity(intToHome);
             }
         });
-*/
+
         //handle cancel button
         cancelButton.setOnClickListener(new View.OnClickListener(){
             @Override
