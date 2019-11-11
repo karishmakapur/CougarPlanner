@@ -45,8 +45,8 @@ public class FirebaseDatabaseHelperTask {
 
         FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
         String uid = firebaseAuth.getUid();
-        this.databaseReference = mDatabase.getReference("courses/" + uid + "/" + task.getCourse() + "/tasks");
-        final String key = databaseReference.push().getKey();
+        this.databaseReference = mDatabase.getReference("tasks/" + uid);
+        //final String key = databaseReference.push().getKey();
 
 
 
@@ -54,7 +54,7 @@ public class FirebaseDatabaseHelperTask {
 
 
 
-        databaseReference.child(key).setValue(task).addOnSuccessListener(new OnSuccessListener<Void>(){
+        databaseReference.child(task.getTaskName()).setValue(task).addOnSuccessListener(new OnSuccessListener<Void>(){
             @Override
             public void onSuccess(Void aVoid){
                 dataStatus.TaskIsInserted();

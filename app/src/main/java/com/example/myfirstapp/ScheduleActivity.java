@@ -3,15 +3,29 @@ package com.example.myfirstapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -19,7 +33,6 @@ public class ScheduleActivity extends AppCompatActivity {
     Button backButton;
     CalendarView calendarView;
     Button addTaskButton;
-
 
 
     @Override
@@ -36,6 +49,7 @@ public class ScheduleActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         addTaskButton = findViewById(R.id.addTaskButton);
         calendarView = findViewById(R.id.calendarView);
+
 
 
 
@@ -67,9 +81,10 @@ public class ScheduleActivity extends AppCompatActivity {
                 Intent intent = new Intent(ScheduleActivity.this, ViewActivity.class);
                 intent.putExtra("date", date);
                 startActivity(intent);
-
             }
         });
 
     }
+
+
 }

@@ -28,7 +28,7 @@ public class AddFriendActivity extends AppCompatActivity {
     EditText searchET;
     ActionBar actionBar;
 
-    private RecyclerView mResultList;
+    private RecyclerView recyclerView;
 
     private DatabaseReference mUserDatabase;
 
@@ -50,9 +50,9 @@ public class AddFriendActivity extends AppCompatActivity {
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        mResultList = (RecyclerView) findViewById(R.id.FriendRecyclerView);
-        mResultList.setHasFixedSize(true);
-        mResultList.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = (RecyclerView) findViewById(R.id.FriendRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //handle back button
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -91,10 +91,12 @@ public class AddFriendActivity extends AppCompatActivity {
 
         Query firebaseSearchQuery = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
+
+
         FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(
 
                 User.class,
-                R.layout.friend_layout,
+                R.layout.searchuser_layout,
                 UsersViewHolder.class,
                 firebaseSearchQuery
 
@@ -110,7 +112,7 @@ public class AddFriendActivity extends AppCompatActivity {
             }
         };
 
-        mResultList.setAdapter(firebaseRecyclerAdapter);
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
 
     }
 

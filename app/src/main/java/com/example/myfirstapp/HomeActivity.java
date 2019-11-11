@@ -5,23 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends AppCompatActivity {
 
     private NavController navController;
     BottomNavigationView bottomNavigationView;
-    Button logoutButton;
     ActionBar actionBar;
 
     @Override
@@ -54,5 +58,8 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return navController.navigateUp();
     }
+
+
+
 
 }

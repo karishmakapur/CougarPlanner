@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".ViewActivity">
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="46dp"
-        android:layout_height="47dp"
-        android:background="@drawable/baseline_arrow_back_ios_black_18dp"
+        android:layout_width="44dp"
+        android:layout_height="55dp"
+        android:background="@drawable/whitebackbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.019"
@@ -18,132 +19,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01" />
 
-    <ScrollView
-        android:id="@+id/taskScrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskViewRecyclerView"
         android:layout_width="361dp"
         android:layout_height="391dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/taskTextView2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView4"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView6"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView5"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView7"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView8"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView9"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/taskTextView10"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/task_here"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

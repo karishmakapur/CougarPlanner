@@ -40,9 +40,12 @@ public class ProfileFragment extends Fragment {
     ScrollView FriendScrollView;
     ScrollView CourseScrollView;
 
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser mFirebaseUser;
-    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
+    String uid = firebaseAuth.getUid();
+    private DatabaseReference databaseReference
+            = FirebaseDatabase.getInstance().getReference("users/" + uid);
+
 
     public ProfileFragment() {
     }
@@ -69,10 +72,6 @@ public class ProfileFragment extends Fragment {
         logoutButton = view.findViewById(R.id.LogoutButton);
         usersName = view.findViewById(R.id.NameTextView);
 
-        firebaseAuth = FirebaseAuth.getInstance() ;
-        mFirebaseUser = firebaseAuth.getCurrentUser();
-        String uid = firebaseAuth.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference("users/" + uid);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
