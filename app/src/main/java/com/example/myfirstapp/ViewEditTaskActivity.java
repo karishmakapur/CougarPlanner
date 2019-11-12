@@ -36,10 +36,6 @@ public class ViewEditTaskActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     String uid = firebaseAuth.getUid();
-    final private int POSITION_OF_PRIORITY_LEVEL = 0;
-    final private int POSITION_OF_LOW = 1;
-    final private int POSITION_OF_MEDIUM = 2;
-    final private int POSITION_OF_HIGH = 3;
 
 
     @Override
@@ -101,11 +97,11 @@ public class ViewEditTaskActivity extends AppCompatActivity {
 
         //handling users request to add a course
         //When user clicks the "Add Task" button, add the task to the users database and connect to course
-        //TODO: error handling: if user enters course that doesn't exist: our app creates the course. But it should also tell user they need to create course
+        //TODO: error handling: if user enters course that doesn't exist: it should tell user they need to create course
        saveTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(ViewEditTaskActivity.this, "You clicked the submit a task button!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewEditTaskActivity.this, "You clicked the save a task button!", Toast.LENGTH_SHORT).show();
 
                 Task task = new Task();
                 task.setTaskName(taskName.getText().toString());

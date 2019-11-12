@@ -41,7 +41,7 @@ public class AddCourseActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
         colorSpinner = findViewById(R.id.ColorSpinner);
         submitCourse = findViewById(R.id.submitCourseButton);
-        courseNameET = findViewById(R.id.editNameOfCourse);
+        courseNameET = findViewById(R.id.NameOfCourseTV);
         meetingDaysET = findViewById(R.id.editMeetingDays);
         instructorET = findViewById(R.id.editInstructorName);
 

@@ -73,11 +73,11 @@
         android:id="@+id/NameTextView"
         android:layout_width="106dp"
         android:layout_height="26dp"
+        android:gravity="center"
         android:text="@string/users_name"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
@@ -87,160 +87,43 @@
 
     <Button
         android:id="@+id/friendButton"
-        android:layout_width="202dp"
-        android:layout_height="43dp"
+        android:layout_width="205.5dp"
+        android:layout_height="35dp"
         android:background="#92BAE6"
         android:text="@string/friends"
-        app:layout_constraintBottom_toTopOf="@+id/FriendScrollView"
-        app:layout_constraintEnd_toStartOf="@id/courseButton"
+        app:layout_constraintBottom_toTopOf="@+id/FriendRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameTextView"
-        app:layout_constraintVertical_bias="0.897" />
+        app:layout_constraintVertical_bias="0.99" />
 
     <Button
         android:id="@+id/courseButton"
-        android:layout_width="202dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="205.5dp"
+        android:layout_height="35dp"
         android:background="#92BAE6"
         android:text="@string/courses"
-        app:layout_constraintBottom_toTopOf="@+id/FriendScrollView"
+        app:layout_constraintBottom_toTopOf="@+id/FriendRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/friendButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameTextView"
-        app:layout_constraintVertical_bias="0.897" />
+        app:layout_constraintVertical_bias="0.99" />
 
-    <ScrollView
-        android:id="@+id/FriendScrollView"
-        android:layout_width="418dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/FriendRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="353dp"
-        android:background="#000F39CF"
+        android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameTextView"
-        app:layout_constraintVertical_bias="0.486">
+        app:layout_constraintVertical_bias="0.486" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/FriendTextView1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView4"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView6"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView5"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView7"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView8"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView9"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/FriendTextView10"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/friendName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </ScrollView>
-
-    <ScrollView
-        android:id="@+id/CourseScrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/CourseRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="353dp"
         android:background="#000F39CF"
@@ -248,123 +131,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameTextView"
-        app:layout_constraintVertical_bias="0.486">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/CourseTextView1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView4"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView6"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView5"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView7"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView8"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView9"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/CourseTextView10"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="#9CA9C4"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/courseName"
-                android:textAllCaps="true"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintVertical_bias="0.486" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

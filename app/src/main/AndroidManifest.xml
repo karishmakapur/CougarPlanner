@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/cougarplanner"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".ViewEditTaskActivity"></activity>
+        <activity android:name=".ViewEditCourseActivity"></activity>
+        <activity android:name=".ViewEditTaskActivity" />
         <activity android:name=".AddTaskActivity" />
         <activity android:name=".ViewActivity" />
         <activity android:name=".ScheduleActivity" />

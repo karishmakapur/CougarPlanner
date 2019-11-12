@@ -4,22 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCourseActivity">
+    tools:context=".ViewEditCourseActivity">
 
     <TextView
         android:id="@+id/PromptAddCourseTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/please_fill_out_the_following_fields"
+        android:text="Course Details"
         android:textAllCaps="true"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.06999999" />
 
     <Spinner
         android:id="@+id/ColorSpinner"
@@ -88,21 +87,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.426" />
 
-    <EditText
+    <TextView
         android:id="@+id/NameOfCourseTV"
-        android:layout_width="201dp"
-        android:layout_height="46dp"
-        android:bufferType="editable"
+        android:layout_width="199dp"
+        android:layout_height="34dp"
+        android:bufferType="normal"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/name_of_course_input"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.891"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.255" />
 
     <EditText
         android:id="@+id/editMeetingDays"
@@ -137,11 +137,11 @@
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/submitCourseButton"
+        android:id="@+id/saveCourseButton"
         android:layout_width="95dp"
         android:layout_height="48dp"
         android:background="#A3DDB0"
-        android:text="@string/add_course"
+        android:text="Save Course"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.155"
@@ -161,4 +161,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.916" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

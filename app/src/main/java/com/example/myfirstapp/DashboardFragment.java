@@ -48,8 +48,6 @@ public class DashboardFragment extends Fragment {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     String uid = firebaseAuth.getUid();
     ArrayList<Task> tasks = new ArrayList<>();
-    Map<Integer,Object> deletedItems;
-
 
 
     public DashboardFragment() {

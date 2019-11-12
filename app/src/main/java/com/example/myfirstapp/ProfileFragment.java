@@ -5,23 +5,28 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class ProfileFragment extends Fragment {
@@ -37,14 +42,18 @@ public class ProfileFragment extends Fragment {
 
 
     ImageButton profilePictureImageButton;
-    ScrollView FriendScrollView;
-    ScrollView CourseScrollView;
+    RecyclerView FriendRecycerView;
+    RecyclerView CourseRecyclerView;
+
+    ArrayList<Course> courses = new ArrayList<>();
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
     String uid = firebaseAuth.getUid();
-    private DatabaseReference databaseReference
+
+    private DatabaseReference databaseReferenceUsers
             = FirebaseDatabase.getInstance().getReference("users/" + uid);
+
+    private DatabaseReference databaseReferenceCourses = FirebaseDatabase.getInstance().getReference("courses/" + uid);
 
 
     public ProfileFragment() {
@@ -62,8 +71,8 @@ public class ProfileFragment extends Fragment {
 
         //getting all references
         profilePictureImageButton = view.findViewById(R.id.ProfilePicImageButton);
-        FriendScrollView = view.findViewById(R.id.FriendScrollView);
-        CourseScrollView = view.findViewById(R.id.CourseScrollView);
+        FriendRecycerView = view.findViewById(R.id.FriendRecyclerView);
+        CourseRecyclerView = view.findViewById(R.id.CourseRecyclerView);
         searchFriendButton = view.findViewById(R.id.addFriendButton);
         addCourseButton = view.findViewById(R.id.AddCourseButton);
         editProfileButton = view.findViewById(R.id.EditProfileButton);
@@ -73,7 +82,14 @@ public class ProfileFragment extends Fragment {
         usersName = view.findViewById(R.id.NameTextView);
 
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        FriendRecycerView.setHasFixedSize(true);
+        FriendRecycerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        CourseRecyclerView.setHasFixedSize(true);
+        CourseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+        //get users name and put on screen
+        databaseReferenceUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -90,16 +106,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-
         //setting default to show the list of friends
-        if (CourseScrollView.getVisibility() == View.VISIBLE) {
-            FriendScrollView.setVisibility(View.VISIBLE);
-            CourseScrollView.setVisibility(View.INVISIBLE);
+        if (CourseRecyclerView.getVisibility() == View.VISIBLE) {
+            FriendRecycerView.setVisibility(View.VISIBLE);
+            CourseRecyclerView.setVisibility(View.INVISIBLE);
         }
 
         //handle image button
@@ -116,10 +126,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v){
                 Toast.makeText(getActivity(), "You clicked the friend button!", Toast.LENGTH_SHORT).show();
-                if (CourseScrollView.getVisibility() == View.VISIBLE) {
-                    CourseScrollView.setVisibility(View.INVISIBLE);
+                if (CourseRecyclerView.getVisibility() == View.VISIBLE) {
+                    CourseRecyclerView.setVisibility(View.INVISIBLE);
                 }
-                FriendScrollView.setVisibility(View.VISIBLE);
+                FriendRecycerView.setVisibility(View.VISIBLE);
                 }
         });
 
@@ -128,10 +138,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v){
                 Toast.makeText(getActivity(), "You clicked the course button!", Toast.LENGTH_SHORT).show();
-                if (FriendScrollView.getVisibility() == View.VISIBLE) {
-                    FriendScrollView.setVisibility(View.INVISIBLE);
+                if (FriendRecycerView.getVisibility() == View.VISIBLE) {
+                    FriendRecycerView.setVisibility(View.INVISIBLE);
                 }
-                CourseScrollView.setVisibility(View.VISIBLE);
+                CourseRecyclerView.setVisibility(View.VISIBLE);
+                displayCourses();
             }
         });
 
@@ -174,6 +185,68 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
+
+    }
+
+    private void displayCourses() {
+            Toast.makeText(getActivity(), "Finding Your Courses", Toast.LENGTH_LONG).show();
+            Query firebaseSearchQuery = databaseReferenceCourses.orderByKey();
+
+            Log.d("TAG", "displayCourses: " + firebaseSearchQuery.toString());
+
+
+        databaseReferenceCourses.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot d : dataSnapshot.getChildren()) {
+
+                            //get all of the courses (put it into arraylist)
+                            courses.add(d.getValue(Course.class));
+                            Log.d("TAG", "onDataChange: " + d.getValue(Course.class).getCourseName());
+
+                        }
+
+                        //printing courses to log for debugging purposes
+                        for (int i = 0; i < courses.size(); i++) {
+                            Log.d("TAG", "displayCourses (loop): " + courses.get(i).getCourseName());
+                        }
+                    }
+                }//onDataChange
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            FirebaseRecyclerAdapter<Course, CourseViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Course, CourseViewHolder>(Course.class, R.layout.courses_layout, CourseViewHolder.class, firebaseSearchQuery) {
+
+                @Override
+                protected void populateViewHolder(CourseViewHolder courseViewHolder, Course course, final int i) {
+
+
+                    Log.d("TAG", "populateViewHolder: " + courses + " i " + i);
+                    courseViewHolder.setDetails(courses.get(i));
+
+                    Log.d("TAG", "populateViewHolder: i " + i);
+
+                    courseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String courseId = getRef(i).getKey();
+
+                            Intent IntToCourse= new Intent(getActivity(), ViewEditCourseActivity.class);
+                            IntToCourse.putExtra("courseId", courseId);
+                            startActivity(IntToCourse);
+                        }
+                    });
+
+                }
+            };
+
+            CourseRecyclerView.setAdapter(firebaseRecyclerAdapter);
+            Log.d("TAG", "displayCourse: setting adapter");
 
     }
 
