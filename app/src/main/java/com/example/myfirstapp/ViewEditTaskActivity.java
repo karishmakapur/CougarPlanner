@@ -32,6 +32,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
     EditText editnotes;
     Button saveTaskButton;
     Button cancelButton;
+    Button deleteBttn;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -55,6 +56,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
         editnotes = findViewById(R.id.editNotes);
         saveTaskButton = findViewById(R.id.saveTaskButton);
         cancelButton = findViewById(R.id.cancelButton);
+        deleteBttn = findViewById(R.id.deleteButton);
 
         //populate data from database to edit text and spinner fields
         this.firebaseDatabase = FirebaseDatabase.getInstance();
@@ -124,7 +126,20 @@ public class ViewEditTaskActivity extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(ViewEditTaskActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewEditTaskActivity.this, "You clicked the delete button!", Toast.LENGTH_SHORT).show();
+
+                Intent intToHome = new Intent(ViewEditTaskActivity.this, ScheduleActivity.class);
+                startActivity(intToHome);
+            }
+        });
+
+        //handle delete button
+        deleteBttn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Toast.makeText(ViewEditTaskActivity.this, "You clicked the delete button!", Toast.LENGTH_SHORT).show();
+                databaseReference.removeValue();
+
                 Intent intToHome = new Intent(ViewEditTaskActivity.this, ScheduleActivity.class);
                 startActivity(intToHome);
             }

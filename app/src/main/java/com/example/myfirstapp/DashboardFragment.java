@@ -129,11 +129,10 @@ public class DashboardFragment extends Fragment {
         FirebaseRecyclerAdapter<Task, TaskViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Task, TaskViewHolder>(Task.class, R.layout.tasks_layout, TaskViewHolder.class, firebaseSearchQuery) {
 
             @Override
-            protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, int i) {
+            protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, final int i) {
 
                 if(!task.getDueDate().equals(day)){
-                    taskViewHolder.mView.setVisibility(View.GONE);
-                    return;
+                    taskViewHolder.itemView.setVisibility(View.GONE);
                 }
 
                 Log.d("TAG", "populateViewHolder: " + tasks + " i " + i);
@@ -141,12 +140,28 @@ public class DashboardFragment extends Fragment {
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 
+                taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String taskId = getRef(i).getKey();
+
+                        Intent IntToTask = new Intent(getActivity(), ViewEditTaskActivity.class);
+                        IntToTask.putExtra("taskId", taskId);
+                        startActivity(IntToTask);
+                    }
+                });
+
+
+
             }
         };
+
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         Log.d("TAG", "displayTasks: setting adapter");
 
 
     }
+
+
 }

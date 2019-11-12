@@ -99,7 +99,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         //handle save button
-        // TODO: update the users information in the database upon save
+        //update the users information in the database upon save
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){

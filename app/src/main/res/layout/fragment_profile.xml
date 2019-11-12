@@ -5,14 +5,14 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#000000"
     tools:context=".ProfileFragment">
 
     <ImageButton
         android:id="@+id/ProfilePicImageButton"
         android:layout_width="96dp"
         android:layout_height="78dp"
-        android:background="@drawable/propic"
+        android:background="@drawable/profilepic"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,9 +23,9 @@
 
     <Button
         android:id="@+id/addFriendButton"
-        android:layout_width="34dp"
-        android:layout_height="32dp"
-        android:background="@drawable/round_person_add_black_18dp"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:background="@drawable/friendiconadd"
         app:layout_constraintBottom_toTopOf="@+id/courseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.836"
@@ -35,9 +35,9 @@
 
     <Button
         android:id="@+id/AddCourseButton"
-        android:layout_width="34dp"
-        android:layout_height="28dp"
-        android:background="@drawable/round_library_add_black_18dp"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:background="@drawable/coursewhite"
         app:layout_constraintBottom_toTopOf="@+id/courseButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.836"
@@ -47,9 +47,9 @@
 
     <Button
         android:id="@+id/EditProfileButton"
-        android:layout_width="34dp"
-        android:layout_height="32dp"
-        android:background="@drawable/baseline_edit_black_18dp"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:background="@drawable/editprofile"
         app:layout_constraintBottom_toTopOf="@+id/friendButton"
         app:layout_constraintEnd_toStartOf="@+id/ProfilePicImageButton"
         app:layout_constraintHorizontal_bias="0.284"
@@ -59,9 +59,9 @@
 
     <Button
         android:id="@+id/LogoutButton"
-        android:layout_width="34dp"
-        android:layout_height="32dp"
-        android:background="@drawable/round_logout"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:background="@drawable/logout"
         app:layout_constraintBottom_toTopOf="@+id/friendButton"
         app:layout_constraintEnd_toStartOf="@+id/ProfilePicImageButton"
         app:layout_constraintHorizontal_bias="0.284"
@@ -75,7 +75,7 @@
         android:layout_height="26dp"
         android:gravity="center"
         android:text="@string/users_name"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
