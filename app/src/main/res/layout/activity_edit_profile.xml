@@ -7,33 +7,20 @@
     tools:context=".EditProfileActivity">
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/editName"
         android:layout_width="201dp"
         android:layout_height="46dp"
         android:bufferType="editable"
         android:ems="10"
-        android:inputType="textPassword"
-        android:text="@string/password"
+        android:hint="@string/nameinput"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.838"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31"
-        android:importantForAutofill="no" />
-
-    <TextView
-        android:id="@+id/DateOfBirthTV"
-        android:layout_width="85dp"
-        android:layout_height="32dp"
-        android:text="@string/dob"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.414" />
+        app:layout_constraintVertical_bias="0.232" />
 
     <TextView
         android:id="@+id/NameTV"
@@ -46,33 +33,52 @@
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
-
-    <TextView
-        android:id="@+id/UsernameTV"
-        android:layout_width="85dp"
-        android:layout_height="32dp"
-        android:text="@string/usernamedot"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.246" />
 
+    <EditText
+        android:id="@+id/editCurrentYear"
+        android:layout_width="201dp"
+        android:layout_height="46dp"
+        android:bufferType="editable"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:hint="fresh, soph, junior, senior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.828"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <EditText
+        android:id="@+id/editExpectedGraduationYear"
+        android:layout_width="201dp"
+        android:layout_height="46dp"
+        android:bufferType="editable"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:hint="20XX"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.602" />
+
     <TextView
-        android:id="@+id/PasswordTV"
+        android:id="@+id/DateOfBirthTV"
         android:layout_width="85dp"
         android:layout_height="32dp"
-        android:text="@string/passworddot"
+        android:text="@string/dob"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintVertical_bias="0.334" />
 
     <TextView
         android:id="@+id/UniversityTV"
@@ -85,7 +91,7 @@
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.419" />
 
     <TextView
         android:id="@+id/CurrentYearTV"
@@ -98,52 +104,20 @@
         app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.584" />
+        app:layout_constraintVertical_bias="0.504" />
 
     <TextView
         android:id="@+id/ExpectedGradTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/graduation_datedot"
+        android:text="Graduation Year"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.684" />
-
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="201dp"
-        android:layout_height="46dp"
-        android:bufferType="editable"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:text="@string/nameinput"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".838"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134" />
-
-    <EditText
-        android:id="@+id/editUsername"
-        android:layout_width="201dp"
-        android:layout_height="46dp"
-        android:bufferType="editable"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/username"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.605" />
 
     <EditText
         android:id="@+id/editDateOfBirth"
@@ -151,15 +125,15 @@
         android:layout_height="46dp"
         android:bufferType="editable"
         android:ems="10"
-        android:inputType="date"
-        android:text="@string/date_of_birth"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:hint="MM/DD/YYYY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintHorizontal_bias="0.828"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".40"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.318" />
 
     <EditText
         android:id="@+id/editUniversity"
@@ -167,47 +141,15 @@
         android:layout_height="46dp"
         android:bufferType="editable"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/university"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.489"
-        android:importantForAutofill="no" />
-
-    <EditText
-        android:id="@+id/editCurrentYear"
-        android:layout_width="201dp"
-        android:layout_height="46dp"
-        android:bufferType="editable"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/currentyear"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.581"
-        android:importantForAutofill="no" />
-
-    <EditText
-        android:id="@+id/editExpectedGraduationYear"
-        android:layout_width="201dp"
-        android:layout_height="46dp"
-        android:bufferType="editable"
-        android:ems="10"
         android:importantForAutofill="no"
-        android:inputType="date"
-        android:text="@string/graduation_date"
+        android:inputType="textPersonName"
+        android:hint="@string/university"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.838"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.684" />
+        app:layout_constraintVertical_bias="0.407" />
 
     <Button
         android:id="@+id/saveProfileButton"
