@@ -75,10 +75,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference databaseReferenceCourses = FirebaseDatabase.getInstance().getReference("courses/" + uid);
 
     StorageReference storageReference;
-    private static int IMAGE_REQUEST;
-    static {
-        IMAGE_REQUEST = 1;
-    }
+    private static int IMAGE_REQUEST = 1;
     private Uri imageUri;
     private StorageTask uploadTask;
 
@@ -233,7 +230,7 @@ public class ProfileFragment extends Fragment {
         if(imageUri== null){
             final StorageReference fileReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
             uploadTask = fileReference.putFile(imageUri);
-            uploadTask.continueWith(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if(!task.isSuccessful()){
@@ -248,7 +245,7 @@ public class ProfileFragment extends Fragment {
                         Uri downloadUri = (Uri) task.getResult();
                         String mUri = downloadUri.toString();
 
-                        databaseReferenceUsers = FirebaseDatabase.getInstance().getReference().child(firebaseAuth.getUid());
+                        databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users/" + uid);
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("imageURL", mUri);
                         //StorageReference.updateChildren(map);
@@ -276,9 +273,15 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
-            Toast.makeText(getContext(), "Begining Upload...", Toast.LENGTH_SHORT).show();
-        }else{
-            uploadImage();
+            Toast.makeText(getContext(), "Beginning Upload...", Toast.LENGTH_SHORT).show();
+            imageUri = data.getData();
+
+            if(uploadTask != null && uploadTask.isInProgress()){
+                Toast.makeText(getContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
+
+            }else{
+                uploadImage();
+            }
         }
     }
 
