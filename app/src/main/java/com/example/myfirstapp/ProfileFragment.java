@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 
@@ -78,6 +80,7 @@ public class ProfileFragment extends Fragment {
     private static final int IMAGE_REQUEST = 234;
     private Uri imageUri;
     StorageTask uploadTask;
+    String url;
 
     public ProfileFragment() {
     }
@@ -111,14 +114,23 @@ public class ProfileFragment extends Fragment {
         CourseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
+
         //get users name and put on screen
         databaseReferenceUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    User user = dataSnapshot.getValue(User.class);
                     String name = dataSnapshot.child("name").getValue().toString();
-
                     usersName.setText(name);
+
+                    url = dataSnapshot.child("imageURL").getValue().toString();
+                    if(!user.getImageURL().equals("default")) {
+                        Glide.with(getContext()).load(user.getImageURL()).into(profilePictureImage);
+                    }
+
+
+
                 }
 
             }
@@ -222,6 +234,7 @@ public class ProfileFragment extends Fragment {
     private String getFileExtension(Uri imageUri){
         ContentResolver contentResolver = getContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        Log.d("TAG", "getFileExtension : " + mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageUri)));
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageUri));
     }
 
@@ -233,20 +246,30 @@ public class ProfileFragment extends Fragment {
             pd.setTitle("Uploading your photo...");
             pd.show();
 
-            StorageReference fileReference = storageReference.child("images/" + System.currentTimeMillis() + "." + getFileExtension(imageUri));
+            final StorageReference fileReference = storageReference.child("images/" + System.currentTimeMillis() + "." + getFileExtension(imageUri));
 
             uploadTask = fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            Uri downloadUri = taskSnapshot.getUploadSessionUri();
-                            String mUri = downloadUri.toString();
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String url = uri.toString();
+                                    Log.d("TAG", "onSuccess: " + url);
+                                    databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users").child(uid);
+                                    HashMap<String, Object> map = new HashMap<>();
+                                    map.put("imageURL", url);
+                                    //Log.d("TAG", "onSuccess: " + mUri);
+                                    databaseReferenceUsers.updateChildren(map);
+                                }
+                            });
+                            //String mUri = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                            //Log.d("TAG", "onSuccess: " + mUri);
+                            //String mUri = downloadUri.toString();
+                            //Log.d("TAG", "onSuccess: " + mUri);
 
-                            databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users").child(uid);
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("imageURL", mUri);
-                            databaseReferenceUsers.updateChildren(map);
 
                             //if the upload is successful
                             //hiding the progress dialog

@@ -12,14 +12,15 @@
         android:id="@+id/ProfilePicImageView"
         android:layout_width="96dp"
         android:layout_height="78dp"
-        android:background="@drawable/profilepic"
-        android:contentDescription="@string/todo"
+        android:contentDescription="@string/choose_profile_pic"
+        android:src="@drawable/profilepic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.052"
+        tools:srcCompat="@drawable/profilepic" />
 
     <Button
         android:id="@+id/addFriendButton"
