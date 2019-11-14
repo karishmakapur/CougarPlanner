@@ -20,12 +20,11 @@ public class User {
     private String dob;
     private String gradyr;
     private String currYear;
-    ArrayList<User> allUsers = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String name, String uniname, String email, String dob, String gradyr, String currYear, String username) {
+    public User(String name, String uniname, String email, String dob, String gradyr, String currYear) {
         this.name = name;
         this.uniname = uniname;
         this.email = email;
@@ -81,7 +80,5 @@ public class User {
     public void setCurrYear(String currYear) {
         this.currYear = currYear;
     }
-
-
 
 }
