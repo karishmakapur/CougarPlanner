@@ -1,7 +1,6 @@
 package com.example.myfirstapp;
 
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,9 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +24,6 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,16 +33,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-//import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -76,13 +68,11 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference databaseReferenceUsers
             = FirebaseDatabase.getInstance().getReference("users/" + uid);
 
-    private DatabaseReference databaseReferenceForUserPhoto;
     private DatabaseReference databaseReferenceCourses = FirebaseDatabase.getInstance().getReference("courses/" + uid);
 
     StorageReference storageReference;
-    private static final int IMAGE_REQUEST = 1;
+    private static final int IMAGE_REQUEST = 234;
     private Uri imageUri;
-    private StorageTask uploadTask;
 
     public ProfileFragment() {
     }
@@ -95,7 +85,8 @@ public class ProfileFragment extends Fragment {
 
         //profile picture image button.
         // TODO: allow user to switch image with this button
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");
+        storageReference = FirebaseStorage.getInstance().getReference();
+
         //getting all references
         profilePictureImage = view.findViewById(R.id.ProfilePicImageView);
         FriendRecycerView = view.findViewById(R.id.FriendRecyclerView);
@@ -119,7 +110,7 @@ public class ProfileFragment extends Fragment {
         databaseReferenceUsers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     String name = dataSnapshot.child("name").getValue().toString();
 
                     usersName.setText(name);
@@ -153,19 +144,19 @@ public class ProfileFragment extends Fragment {
         //handle friend button
         ViewFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(getActivity(), "You clicked the friend button!", Toast.LENGTH_SHORT).show();
                 if (CourseRecyclerView.getVisibility() == View.VISIBLE) {
                     CourseRecyclerView.setVisibility(View.INVISIBLE);
                 }
                 FriendRecycerView.setVisibility(View.VISIBLE);
-                }
+            }
         });
 
         //handle course button
         ViewCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(getActivity(), "You clicked the course button!", Toast.LENGTH_SHORT).show();
                 if (FriendRecycerView.getVisibility() == View.VISIBLE) {
                     FriendRecycerView.setVisibility(View.INVISIBLE);
@@ -176,29 +167,29 @@ public class ProfileFragment extends Fragment {
         });
 
         //handle search / add friend button
-        searchFriendButton.setOnClickListener(new View.OnClickListener(){
+        searchFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(getActivity(), "You clicked the search/add friend button!", Toast.LENGTH_SHORT).show();
-                Intent intToAddFriend = new Intent(getActivity(),AddFriendActivity.class);
+                Intent intToAddFriend = new Intent(getActivity(), AddFriendActivity.class);
                 startActivity(intToAddFriend);
             }
         });
 
         //handle add course button
-        addCourseButton.setOnClickListener(new View.OnClickListener(){
+        addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(getActivity(), "You clicked the add course button!", Toast.LENGTH_SHORT).show();
-                Intent intToAddCourse = new Intent(getActivity(),AddCourseActivity.class);
+                Intent intToAddCourse = new Intent(getActivity(), AddCourseActivity.class);
                 startActivity(intToAddCourse);
             }
         });
 
         //handle edit profile button
-        editProfileButton.setOnClickListener(new View.OnClickListener(){
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(getActivity(), "You clicked the edit profile button!", Toast.LENGTH_SHORT).show();
                 Intent intToEditProfile = new Intent(getActivity(), EditProfileActivity.class);
                 startActivity(intToEditProfile);
@@ -223,33 +214,28 @@ public class ProfileFragment extends Fragment {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_REQUEST);
     }
 
-    /*private String getFileExtension(Uri uri){
-        ContentResolver contentResolver = getContext().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }*/
-
-    private void uploadImage(){
+    private void uploadImage() {
 
 
-        if(imageUri != null){
+        if (imageUri != null) {
             final ProgressDialog pd = new ProgressDialog(getContext());
-            pd.setMessage("Uploading your photo...");
+            pd.setTitle("Uploading your photo...");
             pd.show();
 
-            StorageReference fileReference = storageReference.child("images/pic.jpg");
+            StorageReference fileReference = storageReference.child("images");
 
-            fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    //if the upload is successfull
-                    //hiding the progress dialog
-                    pd.dismiss();
+            fileReference.putFile(imageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //if the upload is successfull
+                            //hiding the progress dialog
+                            pd.dismiss();
 
-                    //and displaying a success toast
-                    Toast.makeText(getContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
+                            //and displaying a success toast
+                            Toast.makeText(getContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     pd.dismiss();
@@ -266,33 +252,24 @@ public class ProfileFragment extends Fragment {
                     pd.setMessage("Uploaded " + ((int) progress) + "%...");
                 }
             });
-        }else {
+        } else {
             Toast.makeText(getActivity(), "No image selected...", Toast.LENGTH_SHORT).show();
         }
     }
     //This is the end of Upload image
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Toast.makeText(getActivity(), "Beginning Upload...", Toast.LENGTH_SHORT).show();
 
             imageUri = data.getData();
 
-            /*
-           if(uploadTask != null && uploadTask.isInProgress()){
-                Toast.makeText(getActivity(), "Upload in progress", Toast.LENGTH_SHORT).show();
-
-            }else{
-                uploadImage();
-            }*/
-
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
                 profilePictureImage.setImageBitmap(bitmap);
-                //uploadImage();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -300,66 +277,65 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private void displayCourses() {
+        Toast.makeText(getActivity(), "Finding Your Courses", Toast.LENGTH_LONG).show();
+        Query firebaseSearchQuery = databaseReferenceCourses.orderByKey();
 
-        private void displayCourses() {
-            Toast.makeText(getActivity(), "Finding Your Courses", Toast.LENGTH_LONG).show();
-            Query firebaseSearchQuery = databaseReferenceCourses.orderByKey();
-
-            Log.d("TAG", "displayCourses: " + firebaseSearchQuery.toString());
+        Log.d("TAG", "displayCourses: " + firebaseSearchQuery.toString());
 
 
         databaseReferenceCourses.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        for (DataSnapshot d : dataSnapshot.getChildren()) {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot d : dataSnapshot.getChildren()) {
 
-                            //get all of the courses (put it into arraylist)
-                            courses.add(d.getValue(Course.class));
-                            Log.d("TAG", "onDataChange: " + d.getValue(Course.class).getCourseName());
+                        //get all of the courses (put it into arraylist)
+                        courses.add(d.getValue(Course.class));
+                        Log.d("TAG", "onDataChange: " + d.getValue(Course.class).getCourseName());
 
-                        }
-
-                        //printing courses to log for debugging purposes
-                        for (int i = 0; i < courses.size(); i++) {
-                            Log.d("TAG", "displayCourses (loop): " + courses.get(i).getCourseName());
-                        }
                     }
-                }//onDataChange
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    //printing courses to log for debugging purposes
+                    for (int i = 0; i < courses.size(); i++) {
+                        Log.d("TAG", "displayCourses (loop): " + courses.get(i).getCourseName());
+                    }
                 }
-            });
+            }//onDataChange
 
-            FirebaseRecyclerAdapter<Course, CourseViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Course, CourseViewHolder>(Course.class, R.layout.courses_layout, CourseViewHolder.class, firebaseSearchQuery) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                @Override
-                protected void populateViewHolder(CourseViewHolder courseViewHolder, Course course, final int i) {
+            }
+        });
+
+        FirebaseRecyclerAdapter<Course, CourseViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Course, CourseViewHolder>(Course.class, R.layout.courses_layout, CourseViewHolder.class, firebaseSearchQuery) {
+
+            @Override
+            protected void populateViewHolder(CourseViewHolder courseViewHolder, Course course, final int i) {
 
 
-                    Log.d("TAG", "populateViewHolder: " + courses + " i " + i);
-                    courseViewHolder.setDetails(courses.get(i));
+                Log.d("TAG", "populateViewHolder: " + courses + " i " + i);
+                courseViewHolder.setDetails(courses.get(i));
 
-                    Log.d("TAG", "populateViewHolder: i " + i);
+                Log.d("TAG", "populateViewHolder: i " + i);
 
-                    courseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String courseId = getRef(i).getKey();
+                courseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String courseId = getRef(i).getKey();
 
-                            Intent IntToCourse= new Intent(getActivity(), ViewEditCourseActivity.class);
-                            IntToCourse.putExtra("courseId", courseId);
-                            startActivity(IntToCourse);
-                        }
-                    });
+                        Intent IntToCourse = new Intent(getActivity(), ViewEditCourseActivity.class);
+                        IntToCourse.putExtra("courseId", courseId);
+                        startActivity(IntToCourse);
+                    }
+                });
 
-                }
-            };
+            }
+        };
 
-            CourseRecyclerView.setAdapter(firebaseRecyclerAdapter);
-            Log.d("TAG", "displayCourse: setting adapter");
+        CourseRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        Log.d("TAG", "displayCourse: setting adapter");
 
     }
 
@@ -369,13 +345,12 @@ public class ProfileFragment extends Fragment {
         if (FirebaseAuth.getInstance() != null) {
             FirebaseAuth.getInstance().signOut();
             Intent intToLogin = new Intent(getActivity(), LoginActivity.class);
-            Toast.makeText(getActivity(),"You are logged out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "You are logged out", Toast.LENGTH_SHORT).show();
             startActivity(intToLogin);
         }
 
 
     }
-
 
 
 }
