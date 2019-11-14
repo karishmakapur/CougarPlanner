@@ -1,6 +1,7 @@
 package com.example.myfirstapp;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,10 +38,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -73,6 +77,7 @@ public class ProfileFragment extends Fragment {
     StorageReference storageReference;
     private static final int IMAGE_REQUEST = 234;
     private Uri imageUri;
+    StorageTask uploadTask;
 
     public ProfileFragment() {
     }
@@ -132,12 +137,11 @@ public class ProfileFragment extends Fragment {
 
         //handle image button
         profilePictureImage.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "You clicked the profile picture button!", Toast.LENGTH_SHORT).show();
                 chooseImage();
-                uploadImage();
+                //uploadImage();
             }
         });
 
@@ -211,24 +215,40 @@ public class ProfileFragment extends Fragment {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), IMAGE_REQUEST);
+        startActivityForResult(intent, IMAGE_REQUEST);
+
+    }
+
+    private String getFileExtension(Uri imageUri){
+        ContentResolver contentResolver = getContext().getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageUri));
     }
 
     private void uploadImage() {
 
-
         if (imageUri != null) {
+
             final ProgressDialog pd = new ProgressDialog(getContext());
             pd.setTitle("Uploading your photo...");
             pd.show();
 
-            StorageReference fileReference = storageReference.child("images");
+            StorageReference fileReference = storageReference.child("images/" + System.currentTimeMillis() + "." + getFileExtension(imageUri));
 
-            fileReference.putFile(imageUri)
+            uploadTask = fileReference.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //if the upload is successfull
+
+                            Uri downloadUri = taskSnapshot.getUploadSessionUri();
+                            String mUri = downloadUri.toString();
+
+                            databaseReferenceUsers = FirebaseDatabase.getInstance().getReference("users").child(uid);
+                            HashMap<String, Object> map = new HashMap<>();
+                            map.put("imageURL", mUri);
+                            databaseReferenceUsers.updateChildren(map);
+
+                            //if the upload is successful
                             //hiding the progress dialog
                             pd.dismiss();
 
@@ -270,6 +290,7 @@ public class ProfileFragment extends Fragment {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imageUri);
                 profilePictureImage.setImageBitmap(bitmap);
+                uploadImage();
 
             } catch (IOException e) {
                 e.printStackTrace();

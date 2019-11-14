@@ -20,6 +20,7 @@ public class User {
     private String dob;
     private String gradyr;
     private String currYear;
+    private String imageURL;
 
     public User() {
     }
@@ -81,4 +82,11 @@ public class User {
         this.currYear = currYear;
     }
 
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 }

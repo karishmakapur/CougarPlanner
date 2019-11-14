@@ -69,6 +69,7 @@ public class FillProfileActivity extends AppCompatActivity {
                 user.setGradyr(GradYearET.getText().toString());
                 user.setCurrYear(CurYearET.getText().toString());
                 user.setUniname(UniET.getText().toString());
+                user.setImageURL("default");
 
 
                 new FirebaseDatabaseHelperUser().addUser(user, new FirebaseDatabaseHelperUser.UserStatus() {
