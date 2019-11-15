@@ -62,7 +62,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="123dp"
-        android:layout_height="101dp"
+        android:layout_height="123dp"
         android:background="@drawable/cougarplanner"
         app:layout_constraintBottom_toTopOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"

@@ -34,7 +34,7 @@
     <string name="currentyear">CurrentYear</string>
     <string name="current_year">Current Year:</string>
     <string name="university">University</string>
-    <string name="date_of_birth">Date Of Birth:</string>
+    <string name="date_of_birth">Date Of Birth</string>
     <string name="universitydot">University:</string>
     <string name="dob">DOB:</string>
     <string name="password">Password</string>
@@ -67,6 +67,8 @@
     <string name="view_schedule">View Schedule</string>
     <string name="colorinput">Color</string>
     <string name="choose_profile_pic">Choose Profile Pic</string>
+    <string name="edit_your_profile_here">Edit your profile here</string>
+    <string name="app_icon">App Icon</string>
     <string-array name="Colors">
         <item>Color</item>
         <item>Blue</item>
@@ -85,5 +87,13 @@
         <item>High</item>
     </string-array>
 
+    <string-array name="CurrentYear">
+        <item>Current Year</item>
+        <item>Freshman</item>
+        <item>Sophomore</item>
+        <item>Junior</item>
+        <item>Senior</item>
 
+
+    </string-array>
 </resources>

@@ -3,20 +3,20 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
+import java.util.Calendar;
 import java.util.List;
 
 public class FillProfileActivity extends AppCompatActivity {
@@ -25,10 +25,12 @@ public class FillProfileActivity extends AppCompatActivity {
     ActionBar actionBar;
     EditText nameET;
     EditText dobET;
+    DatePickerDialog.OnDateSetListener setListener;
     EditText UniET;
     EditText CurYearET;
     EditText GradYearET;
     EditText EmailET;
+    Spinner CurrentYearSpinner;
 
 
     @Override
@@ -51,6 +53,12 @@ public class FillProfileActivity extends AppCompatActivity {
         CurYearET = findViewById(R.id.editCurrentYear);
         GradYearET = findViewById(R.id.editExpectedGraduationDate);
         EmailET = findViewById(R.id.editEmail);
+        CurrentYearSpinner = findViewById(R.id.CurrentYearSpinner);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(FillProfileActivity.this,android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.CurrentYear));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CurrentYearSpinner.setAdapter(adapter);
+
 
 
         //handle save button
@@ -67,7 +75,7 @@ public class FillProfileActivity extends AppCompatActivity {
                 user.setDob(dobET.getText().toString());
                 user.setEmail(EmailET.getText().toString());
                 user.setGradyr(GradYearET.getText().toString());
-                user.setCurrYear(CurYearET.getText().toString());
+                user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
                 user.setUniname(UniET.getText().toString());
                 user.setImageURL("default");
 
