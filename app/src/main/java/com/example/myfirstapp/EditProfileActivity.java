@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,17 +32,20 @@ public class EditProfileActivity extends AppCompatActivity {
 
     Button cancelButton;
     Button saveButton;
-    Button deleteButton;
+    //Button deleteButton;
+    TextView tvDeleteAcct;
     ActionBar actionBar;
     EditText nameET;
     EditText dobET;
     EditText uniET;
-    EditText currYearET;
+    //EditText currYearET;
+    Spinner CurrentYearSpinner;
     EditText gradYearET;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     String uid = firebaseAuth.getUid();
+
 
 
     @Override
@@ -61,9 +66,11 @@ public class EditProfileActivity extends AppCompatActivity {
         nameET = findViewById(R.id.editName);
         dobET = findViewById(R.id.editDateOfBirth);
         uniET = findViewById(R.id.editUniversity);
-        currYearET = findViewById(R.id.editCurrentYear);
+        //currYearET = findViewById(R.id.editCurrentYear);
+        CurrentYearSpinner = findViewById(R.id.currentYearSpinner);
         gradYearET = findViewById(R.id.editExpectedGraduationYear);
-        deleteButton = findViewById(R.id.deleteAccountButton);
+        //deleteButton = findViewById(R.id.deleteAccountButton);
+        tvDeleteAcct = findViewById(R.id.deleteAccountTV);
 
         //populate data from database to edit text and spinner fields
         this.firebaseDatabase = FirebaseDatabase.getInstance();
@@ -81,9 +88,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     nameET.setText(name);
                     dobET.setText(dob);
-                    currYearET.setText(currYear);
+                    //currYearET.setText(currYear);
                     gradYearET.setText(gradYear);
                     uniET.setText(uniname);
+
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(EditProfileActivity.this, R.array.CurrentYear, android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    CurrentYearSpinner.setAdapter(adapter);
+                    if (currYear != null) {
+                        int spinnerPosition = adapter.getPosition(currYear);
+                        CurrentYearSpinner.setSelection(spinnerPosition);
+                    }
 
                 }
 
@@ -114,14 +129,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 User user = new User();
                 user.setName(nameET.getText().toString());
-                user.setCurrYear(currYearET.getText().toString());
+                user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
                 user.setDob(dobET.getText().toString());
                 user.setGradyr(gradYearET.getText().toString());
                 user.setUniname(uniET.getText().toString());
 
 
                 databaseReference.child("name").setValue(nameET.getText().toString());
-                databaseReference.child("currYear").setValue(currYearET.getText().toString());
+                databaseReference.child("currYear").setValue(CurrentYearSpinner.getSelectedItem().toString());
                 databaseReference.child("dob").setValue(dobET.getText().toString());
                 databaseReference.child("gradyr").setValue(gradYearET.getText().toString());
                 databaseReference.child("uniname").setValue(uniET.getText().toString());
@@ -131,7 +146,8 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        //Delete account TextView
+        tvDeleteAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intToDelete = new Intent(EditProfileActivity.this, DeleteAccountActivity.class);

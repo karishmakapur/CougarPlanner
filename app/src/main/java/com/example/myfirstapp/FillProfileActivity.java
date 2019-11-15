@@ -27,7 +27,7 @@ public class FillProfileActivity extends AppCompatActivity {
     EditText dobET;
     DatePickerDialog.OnDateSetListener setListener;
     EditText UniET;
-    EditText CurYearET;
+    //EditText CurYearET;
     EditText GradYearET;
     EditText EmailET;
     Spinner CurrentYearSpinner;
@@ -50,7 +50,7 @@ public class FillProfileActivity extends AppCompatActivity {
         nameET = findViewById(R.id.editName);
         dobET = findViewById(R.id.editDateOfBirth);
         UniET = findViewById(R.id.editUniversity);
-        CurYearET = findViewById(R.id.editCurrentYear);
+        //CurYearET = findViewById(R.id.editCurrentYear);
         GradYearET = findViewById(R.id.editExpectedGraduationDate);
         EmailET = findViewById(R.id.editEmail);
         CurrentYearSpinner = findViewById(R.id.CurrentYearSpinner);
