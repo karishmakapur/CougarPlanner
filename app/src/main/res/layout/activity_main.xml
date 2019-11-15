@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/emailET"
         android:layout_width="215dp"
         android:layout_height="47dp"
         android:ems="10"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.371" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/passwordET"
         android:layout_width="215dp"
         android:layout_height="47dp"
         android:layout_marginTop="44dp"
@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/emailET"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/emailET"
         app:layout_constraintVertical_bias="0.37" />
 
     <ImageView
@@ -65,7 +65,7 @@
         android:layout_width="123dp"
         android:layout_height="123dp"
         android:background="@drawable/cougarplanner"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/emailET"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"

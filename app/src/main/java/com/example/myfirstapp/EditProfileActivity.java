@@ -8,13 +8,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +30,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     Button cancelButton;
     Button saveButton;
+    Button deleteButton;
     ActionBar actionBar;
     EditText nameET;
     EditText dobET;
@@ -57,6 +63,7 @@ public class EditProfileActivity extends AppCompatActivity {
         uniET = findViewById(R.id.editUniversity);
         currYearET = findViewById(R.id.editCurrentYear);
         gradYearET = findViewById(R.id.editExpectedGraduationYear);
+        deleteButton = findViewById(R.id.deleteAccountButton);
 
         //populate data from database to edit text and spinner fields
         this.firebaseDatabase = FirebaseDatabase.getInstance();
@@ -65,7 +72,7 @@ public class EditProfileActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     String name = dataSnapshot.child("name").getValue().toString();
                     String dob = dataSnapshot.child("dob").getValue().toString();
                     String currYear = dataSnapshot.child("currYear").getValue().toString();
@@ -89,9 +96,9 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         //handle back button
-        cancelButton.setOnClickListener(new View.OnClickListener(){
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(EditProfileActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
                 Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
                 startActivity(intToHome);
@@ -100,9 +107,9 @@ public class EditProfileActivity extends AppCompatActivity {
 
         //handle save button
         //update the users information in the database upon save
-        saveButton.setOnClickListener(new View.OnClickListener(){
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(EditProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
                 User user = new User();
@@ -121,6 +128,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
                 startActivity(intToHome);
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intToDelete = new Intent(EditProfileActivity.this, DeleteAccountActivity.class);
+               startActivity(intToDelete);
             }
         });
     }

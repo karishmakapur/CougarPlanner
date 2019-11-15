@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,8 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
         //getting references
         mFirebaseAuth = FirebaseAuth.getInstance();
-        emailId = findViewById(R.id.editText);
-        password = findViewById(R.id.editText2);
+        emailId = findViewById(R.id.emailET);
+        password = findViewById(R.id.passwordET);
         btnSignIn = findViewById(R.id.button);
         tvSignUp = findViewById(R.id.textView);
         tvForgotPassword = findViewById(R.id.forgotPasswordTV);
