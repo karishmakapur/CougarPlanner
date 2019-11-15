@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     password.requestFocus();
                 }
                 else if(email.isEmpty() && pwd.isEmpty()){ //if no email and no password is entered, display message
-                    Toast.makeText(MainActivity.this,"Fields are Empty!", Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this,"Fields are Empty!", Toast.LENGTH_SHORT).show();
                 }
                 else if(!(email.isEmpty() && pwd.isEmpty())){ //if email and password is entered
+
 
                     //create a new user with the inputted email and password
                     mFirebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -80,18 +83,22 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             //if not successful in creating account, notify user
                             if(!task.isSuccessful()){
-                                Toast.makeText(MainActivity.this,"SignUp Unsuccessful, please try again!", Toast.LENGTH_SHORT);
+                                Toast.makeText(MainActivity.this,"SignUp Unsuccessful, please try again!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,"Maybe you already have an account?", Toast.LENGTH_SHORT).show();
+
 
                             }
                             else{
-                                //if creating account is successful, then send them to the home screen to
-                                startActivity(new Intent(MainActivity.this, FillProfileActivity.class));
+
+                                //if creating account is successful, then send them to the verify email screen
+                                startActivity(new Intent(MainActivity.this, VerifyEmailActivity.class));
+
                             }
                         }
                     });
                 }
                 else{
-                    Toast.makeText(MainActivity.this,"Error Occurred!", Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this,"Error Occurred!", Toast.LENGTH_SHORT).show();
 
                 }
             }
