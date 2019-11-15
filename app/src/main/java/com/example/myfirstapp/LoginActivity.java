@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText emailId, password;
     Button btnSignIn;
     TextView tvSignUp;
+    TextView tvForgotPassword;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     ActionBar actionBar;
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.editText2);
         btnSignIn = findViewById(R.id.button);
         tvSignUp = findViewById(R.id.textView);
+        tvForgotPassword = findViewById(R.id.forgotPasswordTV);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -106,6 +109,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intSignUp = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intSignUp);
+            }
+        });
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intForgot = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intForgot);
             }
         });
     }

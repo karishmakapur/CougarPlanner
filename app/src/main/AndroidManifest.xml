@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/cougarplanner"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".VerifyEmailActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".VerifyEmailActivity" />
         <activity android:name=".ViewEditCourseActivity" />
         <activity android:name=".ViewEditTaskActivity" />
         <activity android:name=".AddTaskActivity" />
