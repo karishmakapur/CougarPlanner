@@ -372,8 +372,8 @@ public class ProfileFragment extends Fragment {
 
 
                 Log.d("TAG", "populateViewHolder: " + courses + " i " + i);
-                courseViewHolder.setDetails(courses.get(i));
-                String colorStr = course.getColor();
+                courseViewHolder.setDetails(courses.get(i), getContext());
+               /* String colorStr = course.getColor();
 
                 if(colorStr.equals("Pink")) {
                     courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Pink));
@@ -404,7 +404,7 @@ public class ProfileFragment extends Fragment {
                 }
                 else if(colorStr.equals("Magenta")){
                     courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Magenta));
-                }
+                }*/
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 
