@@ -136,8 +136,9 @@ public class AddTaskActivity extends AppCompatActivity {
                 });
 
 
-                Intent intToHome = new Intent(AddTaskActivity.this, ScheduleActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(AddTaskActivity.this, ScheduleActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 
@@ -146,8 +147,9 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Toast.makeText(AddTaskActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
-                Intent intToHome = new Intent(AddTaskActivity.this, ScheduleActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(AddTaskActivity.this, ScheduleActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
     }

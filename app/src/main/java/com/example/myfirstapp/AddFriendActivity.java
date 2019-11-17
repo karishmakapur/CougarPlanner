@@ -53,14 +53,16 @@ public class AddFriendActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.FriendRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
 
         //handle back button
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(AddFriendActivity.this, "You clicked the back button!", Toast.LENGTH_SHORT).show();
-                Intent intToHome = new Intent(AddFriendActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(AddFriendActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 

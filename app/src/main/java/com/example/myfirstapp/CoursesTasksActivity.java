@@ -111,7 +111,7 @@ public class CoursesTasksActivity extends AppCompatActivity {
             protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, final int i) {
 
                 Log.d("TAG", "populateViewHolder CoursesTasksActivity: " + tasks + " i " + i);
-                taskViewHolder.setDetails(tasks.get(i));
+                taskViewHolder.setDetails(tasks.get(i), getBaseContext());
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 

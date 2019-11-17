@@ -79,6 +79,7 @@ public class DashboardFragment extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.taskRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
 
         displayTasks(date);
 
@@ -134,7 +135,7 @@ public class DashboardFragment extends Fragment {
             protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, final int i) {
 
                 Log.d("TAG", "populateViewHolder: " + tasks + " i " + i);
-                taskViewHolder.setDetails(tasks.get(i));
+                taskViewHolder.setDetails(tasks.get(i), getContext());
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 

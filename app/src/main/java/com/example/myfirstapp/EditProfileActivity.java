@@ -115,8 +115,9 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(EditProfileActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
-                Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 
@@ -141,8 +142,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 databaseReference.child("gradyr").setValue(gradYearET.getText().toString());
                 databaseReference.child("uniname").setValue(uniET.getText().toString());
 
-                Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 

@@ -51,8 +51,9 @@ public class AddCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Toast.makeText(AddCourseActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
-                Intent intToHome = new Intent(AddCourseActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(AddCourseActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 
@@ -100,8 +101,9 @@ public class AddCourseActivity extends AppCompatActivity {
                 });
 
 
-                Intent intToHome = new Intent(AddCourseActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(AddCourseActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
     }

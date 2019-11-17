@@ -58,8 +58,9 @@ public class ScheduleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Toast.makeText(ScheduleActivity.this, "You clicked the back button!", Toast.LENGTH_SHORT).show();
-                Intent intToHome = new Intent(ScheduleActivity.this,HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(ScheduleActivity.this,HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 

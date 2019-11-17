@@ -62,6 +62,7 @@ public class ViewActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.taskViewRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(ViewActivity.this));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
 
         displayTasks(date);
 
@@ -70,8 +71,9 @@ public class ViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ViewActivity.this, "You clicked the back button!", Toast.LENGTH_SHORT).show();
-                Intent intToDaily = new Intent(ViewActivity.this, ScheduleActivity.class);
-                startActivity(intToDaily);
+                //Intent intToDaily = new Intent(ViewActivity.this, ScheduleActivity.class);
+                //startActivity(intToDaily);
+                finish();
             }
         });
 
@@ -118,7 +120,7 @@ public class ViewActivity extends AppCompatActivity {
 
 
                 Log.d("TAG", "populateViewHolder: " + tasks);
-                taskViewHolder.setDetails(tasks.get(i));
+                taskViewHolder.setDetails(tasks.get(i), getBaseContext());
 
                 taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

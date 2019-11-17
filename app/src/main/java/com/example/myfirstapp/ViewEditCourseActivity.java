@@ -121,8 +121,9 @@ public class ViewEditCourseActivity extends AppCompatActivity {
                 databaseReference.child("instructor").setValue(instructorET.getText().toString());
                 databaseReference.child("color").setValue(spinnerColor.getSelectedItem().toString());
 
-                Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 
@@ -131,8 +132,9 @@ public class ViewEditCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ViewEditCourseActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
-                Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 
@@ -166,8 +168,9 @@ public class ViewEditCourseActivity extends AppCompatActivity {
 
 
                 databaseReference.removeValue();
-                Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
+                //startActivity(intToHome);
+                finish();
             }
         });
 
