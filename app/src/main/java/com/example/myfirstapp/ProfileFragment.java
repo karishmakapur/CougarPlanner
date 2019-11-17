@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -115,6 +116,8 @@ public class ProfileFragment extends Fragment {
         FriendRecycerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         CourseRecyclerView.setHasFixedSize(true);
         CourseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        CourseRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
+
 
 
 
@@ -363,12 +366,45 @@ public class ProfileFragment extends Fragment {
 
         FirebaseRecyclerAdapter<Course, CourseViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Course, CourseViewHolder>(Course.class, R.layout.courses_layout, CourseViewHolder.class, firebaseSearchQuery) {
 
+            @SuppressLint("ResourceAsColor")
             @Override
             protected void populateViewHolder(CourseViewHolder courseViewHolder, Course course, final int i) {
 
 
                 Log.d("TAG", "populateViewHolder: " + courses + " i " + i);
                 courseViewHolder.setDetails(courses.get(i));
+                String colorStr = course.getColor();
+
+                if(colorStr.equals("Pink")) {
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Pink));
+                }
+                else if(colorStr.equals("Red")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Red));
+                }
+                else if(colorStr.equals("Orange")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Orange));
+                }
+                else if(colorStr.equals("Yellow")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Yellow));
+                }
+                else if(colorStr.equals("Green")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Green));
+                }
+                else if(colorStr.equals("Cyan")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Cyan));
+                }
+                else if(colorStr.equals("Azure")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Azure));
+                }
+                else if(colorStr.equals("Blue")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Blue));
+                }
+                else if(colorStr.equals("Violet")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Violet));
+                }
+                else if(colorStr.equals("Magenta")){
+                    courseViewHolder.itemView.setBackgroundColor(getResources().getColor(R.color.Magenta));
+                }
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 

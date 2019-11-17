@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class CourseViewHolder extends RecyclerView.ViewHolder {
         coursemeeting.setText(course.getMeetingDays());
         courseinstructor.setText(course.getInstructor());
         coursecolor.setText(course.getColor());
+
 
         Log.d("TAG", "setDetails: " + coursename.getText());
 
