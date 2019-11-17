@@ -6,6 +6,7 @@ public class Task {
     private String dueDate;
     private String priorityLevel;
     private String notes;
+    private String completed;
 
     public Task() {
     }
@@ -56,5 +57,13 @@ public class Task {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(String completed) {
+        this.completed = completed;
     }
 }

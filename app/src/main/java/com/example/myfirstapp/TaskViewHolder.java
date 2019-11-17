@@ -39,6 +39,7 @@ public class TaskViewHolder extends RecyclerView.ViewHolder {
         taskduedate.setText(task.getDueDate());
         taskpriority.setText(task.getPriorityLevel());
 
+
         Log.d("TAG", "setDetails: " + taskname.getText());
 
 

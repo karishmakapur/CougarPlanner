@@ -5,19 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".ViewActivity">
+    tools:context=".CoursesTasksActivity">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="44dp"
-        android:layout_height="55dp"
-        android:background="@drawable/whitebackbutton"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/CoursesTasksRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="353dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.019"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintVertical_bias="0.486" />
 
     <TextView
         android:id="@+id/tv_no_data"
@@ -26,7 +25,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:gravity="center"
-        android:text="@string/no_tasks_due_today"
+        android:text="No Tasks For This Course"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#6B9BEB"
         android:textSize="24sp"
@@ -36,14 +35,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/taskViewRecyclerView"
-        android:layout_width="361dp"
-        android:layout_height="391dp"
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="31dp"
+        android:layout_height="42dp"
+        android:background="@drawable/whitebackbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

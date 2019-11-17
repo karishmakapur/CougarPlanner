@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddTaskActivity extends AppCompatActivity {
@@ -23,9 +32,10 @@ public class AddTaskActivity extends AppCompatActivity {
     Button cancelButton;
     Button submitTask;
     EditText TaskNameET;
-    EditText CourseNameET;
+    Spinner CourseNameSpinner;
     EditText DueDateET;
     EditText NotesET;
+    ArrayList<String> courseNames = new ArrayList<>();
 
 
     @Override
@@ -43,20 +53,52 @@ public class AddTaskActivity extends AppCompatActivity {
         PrioritySpinner = findViewById(R.id.prioritySpinner);
         submitTask = findViewById(R.id.addTaskButton);
         TaskNameET = findViewById(R.id.editTaskName);
-        CourseNameET = findViewById(R.id.editTaskCourseName);
+        CourseNameSpinner = findViewById(R.id.editTaskCourseName);
         DueDateET = findViewById(R.id.editTaskDueDate);
         NotesET = findViewById(R.id.editNotes);
 
 
-        //populate spinner with correct data
+
+        //populate priority spinner with correct data
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(AddTaskActivity.this,android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.PriorityLevel));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         PrioritySpinner.setAdapter(adapter);
 
-        //handling users request to add a course
+
+        //populate course spinner with correct data
+        final ArrayAdapter<String> adapter2 =
+                new ArrayAdapter<>(AddTaskActivity.this,android.R.layout.simple_spinner_item, courseNames);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CourseNameSpinner.setAdapter(adapter2);
+
+        //fill the course array
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String uid = firebaseAuth.getUid();
+
+        DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference("courses/" + uid);
+
+        courseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot d : dataSnapshot.getChildren()){
+                        Course course = d.getValue(Course.class);
+                        courseNames.add(course.getCourseName());
+                        adapter2.notifyDataSetChanged();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         //When user clicks the "Add Task" button, add the task to the users database and connect to course
-        //TODO: error handling: if user enters course that doesn't exist: our app creates the course. But it should also tell user they need to create course
+        //error handling: ensure a course exists: this is done with the drop down of courses
         submitTask.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -64,10 +106,11 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 Task task = new Task();
                 task.setTaskName(TaskNameET.getText().toString());
-                task.setCourse(CourseNameET.getText().toString());
+                task.setCourse(CourseNameSpinner.getSelectedItem().toString());
                 task.setDueDate(DueDateET.getText().toString());
                 task.setPriorityLevel(PrioritySpinner.getSelectedItem().toString());
                 task.setNotes(NotesET.getText().toString());
+                task.setCompleted("false");
 
                 new FirebaseDatabaseHelperTask().addTask(task, new FirebaseDatabaseHelperTask.TaskStatus() {
                     @Override

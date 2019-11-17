@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,81 +28,75 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ViewActivity extends AppCompatActivity {
+public class CoursesTasksActivity extends AppCompatActivity {
 
-    Button backButton;
     ActionBar actionBar;
-    private TextView noTasks;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
+    private String selectedCourseID;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     String uid = firebaseAuth.getUid();
     ArrayList<Task> tasks = new ArrayList<>();
+    TextView noTasks;
     private RecyclerView recyclerView;
+    Button backButton;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view);
+        setContentView(R.layout.activity_courses_tasks);
 
-        //getting the date from the clicked date from previous activity
-        Intent incoming = getIntent();
-        String date = incoming.getStringExtra("date");
+        selectedCourseID = getIntent().getExtras().get("courseId").toString();
 
         //setting up action bar
         actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2196f3")));
-        actionBar.setTitle("Tasks Due on " + date);
+        actionBar.setTitle("View Course " + selectedCourseID + "'s Tasks");
 
         //getting references
-        backButton = findViewById(R.id.backButton);
         noTasks = findViewById(R.id.tv_no_data);
-        this.firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("tasks/" + uid);
-
-        recyclerView = (RecyclerView) findViewById(R.id.taskViewRecyclerView);
+        recyclerView = findViewById(R.id.CoursesTasksRecyclerView);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ViewActivity.this));
-
-        displayTasks(date);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(CoursesTasksActivity.this));
+        backButton = findViewById(R.id.backButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ViewActivity.this, "You clicked the back button!", Toast.LENGTH_SHORT).show();
-                Intent intToDaily = new Intent(ViewActivity.this, ScheduleActivity.class);
-                startActivity(intToDaily);
+                Toast.makeText(CoursesTasksActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
+                Intent intToHome = new Intent(CoursesTasksActivity.this, ViewEditCourseActivity.class);
+                intToHome.putExtra("courseId" , selectedCourseID);
+                startActivity(intToHome);
             }
         });
 
+        displayTasks();
     }
 
-    private void displayTasks(final String day) {
-        Toast.makeText(ViewActivity.this, "Finding Today's Tasks", Toast.LENGTH_LONG).show();
-        Query firebaseSearchQuery = FirebaseDatabase.getInstance().getReference("tasks/" + uid).orderByChild("dueDate").equalTo(day);
+    private void displayTasks() {
+        Toast.makeText(CoursesTasksActivity.this, "Finding Your Courses Tasks", Toast.LENGTH_SHORT).show();
+        Query query = FirebaseDatabase.getInstance().getReference("tasks/" + uid).orderByChild("course").equalTo(selectedCourseID);
 
-        Log.d("TAG", "displayTasks: " + firebaseSearchQuery.toString());
+        Log.d("TAG", "displayCourses: " + query.toString());
 
-        firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
+
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
                         tasks.add(d.getValue(Task.class));
-
                         Log.d("TAG", "onDataChange: " + d.getValue(Task.class).getTaskName());
+
                     }
 
                     //printing tasks to log for debugging purposes
                     for (int i = 0; i < tasks.size(); i++) {
                         Log.d("TAG", "displayTasks (loop): " + tasks.get(i).getTaskName());
                     }
-                }
-                else {
+                } else {
                     noTasks.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.INVISIBLE);
-
                 }
             }//onDataChange
 
@@ -110,31 +105,31 @@ public class ViewActivity extends AppCompatActivity {
 
             }
         });
-        FirebaseRecyclerAdapter<Task, TaskViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Task, TaskViewHolder>(Task.class,R.layout.tasks_layout, TaskViewHolder.class, firebaseSearchQuery) {
+        FirebaseRecyclerAdapter<Task, TaskViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Task, TaskViewHolder>(Task.class, R.layout.tasks_layout, TaskViewHolder.class, query) {
 
             @Override
             protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, final int i) {
 
-
-
-                Log.d("TAG", "populateViewHolder: " + tasks);
+                Log.d("TAG", "populateViewHolder CoursesTasksActivity: " + tasks + " i " + i);
                 taskViewHolder.setDetails(tasks.get(i));
 
+                Log.d("TAG", "populateViewHolder: i " + i);
+
+                //show task details
                 taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String taskId = getRef(i).getKey();
 
-                        Intent IntToTask = new Intent(ViewActivity.this, ViewEditTaskActivity.class);
+                        Intent IntToTask = new Intent(CoursesTasksActivity.this, ViewEditTaskActivity.class);
                         IntToTask.putExtra("taskId", taskId);
                         startActivity(IntToTask);
                     }
                 });
+
+
             }
         };
-
-
-
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         Log.d("TAG", "displayTasks: setting adapter");
 

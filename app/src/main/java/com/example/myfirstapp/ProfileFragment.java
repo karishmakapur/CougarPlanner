@@ -60,6 +60,8 @@ public class ProfileFragment extends Fragment {
     Button logoutButton;
     Button editProfileButton;
     TextView usersName;
+    private TextView noCourses;
+
 
 
     ImageView profilePictureImage;
@@ -106,6 +108,7 @@ public class ProfileFragment extends Fragment {
         ViewCourseButton = view.findViewById(R.id.courseButton);
         logoutButton = view.findViewById(R.id.LogoutButton);
         usersName = view.findViewById(R.id.NameTextView);
+        noCourses = view.findViewById(R.id.tv_no_data);
 
 
         FriendRecycerView.setHasFixedSize(true);
@@ -328,7 +331,7 @@ public class ProfileFragment extends Fragment {
         Log.d("TAG", "displayCourses: " + firebaseSearchQuery.toString());
 
 
-        databaseReferenceCourses.addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -344,6 +347,11 @@ public class ProfileFragment extends Fragment {
                     for (int i = 0; i < courses.size(); i++) {
                         Log.d("TAG", "displayCourses (loop): " + courses.get(i).getCourseName());
                     }
+                }
+                else
+                {
+                    noCourses.setVisibility(View.VISIBLE);
+                    CourseRecyclerView.setVisibility(View.INVISIBLE);
                 }
             }//onDataChange
 

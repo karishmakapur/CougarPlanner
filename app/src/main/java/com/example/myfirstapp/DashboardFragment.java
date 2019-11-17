@@ -39,6 +39,7 @@ public class DashboardFragment extends Fragment {
 
     Button viewSchedule;
     private TextView currentDateTV;
+    private TextView noTasks;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String date;
@@ -71,6 +72,7 @@ public class DashboardFragment extends Fragment {
 
         //getting references
         viewSchedule = v.findViewById(R.id.viewScheduleButton);
+        noTasks = v.findViewById(R.id.tv_no_data);
         this.firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("tasks/" + uid);
 
@@ -94,22 +96,18 @@ public class DashboardFragment extends Fragment {
 
 
     private void displayTasks(final String day) {
-        Toast.makeText(getActivity(), "Finding Today's Tasks", Toast.LENGTH_LONG).show();
-        Query firebaseSearchQuery = databaseReference.orderByKey();
+        Toast.makeText(getActivity(), "Finding Today's Tasks", Toast.LENGTH_SHORT).show();
+        Query firebaseSearchQuery = FirebaseDatabase.getInstance().getReference("tasks/" + uid).orderByChild("dueDate").equalTo(date);
 
         Log.d("TAG", "displayTasks: " + firebaseSearchQuery.toString());
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
-
-                        //get all of the tasks (put it into arraylist) if their due date is the current date.
-                        //if (d.getValue(Task.class).getDueDate().equals(day)) {
                         tasks.add(d.getValue(Task.class));
                         Log.d("TAG", "onDataChange: " + d.getValue(Task.class).getTaskName());
-                        //}
 
                     }
 
@@ -117,6 +115,10 @@ public class DashboardFragment extends Fragment {
                     for (int i = 0; i < tasks.size(); i++) {
                         Log.d("TAG", "displayTasks (loop): " + tasks.get(i).getTaskName());
                     }
+                } else {
+                    noTasks.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.INVISIBLE);
+
                 }
             }//onDataChange
 
@@ -131,15 +133,12 @@ public class DashboardFragment extends Fragment {
             @Override
             protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, final int i) {
 
-                if(!task.getDueDate().equals(day)){
-                    taskViewHolder.itemView.setVisibility(View.GONE);
-                }
-
                 Log.d("TAG", "populateViewHolder: " + tasks + " i " + i);
                 taskViewHolder.setDetails(tasks.get(i));
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 
+                //show task details
                 taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -152,11 +151,8 @@ public class DashboardFragment extends Fragment {
                 });
 
 
-
             }
         };
-
-
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         Log.d("TAG", "displayTasks: setting adapter");
 
