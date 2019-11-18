@@ -181,8 +181,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                     databaseReference.child("completed").setValue("false");
                 }
 
-                //Intent intToHome = new Intent(ViewEditTaskActivity.this, ScheduleActivity.class);
-                //startActivity(intToHome);
+
                 finish();
             }
         });
@@ -193,8 +192,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
             public void onClick(View v){
                 Toast.makeText(ViewEditTaskActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
 
-                //Intent intToHome = new Intent(ViewEditTaskActivity.this, ScheduleActivity.class);
-                //startActivity(intToHome);
+
                 finish();
             }
         });
@@ -206,8 +204,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                 Toast.makeText(ViewEditTaskActivity.this, "You clicked the delete button!", Toast.LENGTH_SHORT).show();
                 databaseReference.removeValue();
 
-                //Intent intToHome = new Intent(ViewEditTaskActivity.this, ScheduleActivity.class);
-                //startActivity(intToHome);
+               
                 finish();
             }
         });

@@ -4,10 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,6 +36,9 @@ public class AddTaskActivity extends AppCompatActivity {
     EditText DueDateET;
     EditText NotesET;
     ArrayList<String> courseNames = new ArrayList<>();
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
     @Override
@@ -73,7 +76,7 @@ public class AddTaskActivity extends AppCompatActivity {
         CourseNameSpinner.setAdapter(adapter2);
 
         //fill the course array
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         String uid = firebaseAuth.getUid();
 
         DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference("courses/" + uid);
@@ -112,32 +115,11 @@ public class AddTaskActivity extends AppCompatActivity {
                 task.setNotes(NotesET.getText().toString());
                 task.setCompleted("false");
 
-                new FirebaseDatabaseHelperTask().addTask(task, new FirebaseDatabaseHelperTask.TaskStatus() {
-                    @Override
-                    public void TaskIsLoaded(List<Task> tasks, List<String> keys) {
-
-                    }
-
-                    @Override
-                    public void TaskIsInserted() {
-
-
-                    }
-
-                    @Override
-                    public void DataIsUpdated() {
-
-                    }
-
-                    @Override
-                    public void DataIsDeleted() {
-
-                    }
-                });
-
-
-                //Intent intToHome = new Intent(AddTaskActivity.this, ScheduleActivity.class);
-                //startActivity(intToHome);
+                String uid = firebaseAuth.getUid();
+                mDatabase = FirebaseDatabase.getInstance();
+                databaseReference = mDatabase.getReference("tasks/" + uid);
+                databaseReference.child(task.getTaskName()).setValue(task);
+                Log.d(null, "addTask: task course name: " + task.getCourse());
                 finish();
             }
         });
@@ -147,8 +129,6 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Toast.makeText(AddTaskActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
-                //Intent intToHome = new Intent(AddTaskActivity.this, ScheduleActivity.class);
-                //startActivity(intToHome);
                 finish();
             }
         });

@@ -47,14 +47,12 @@ public class VerifyEmailActivity extends AppCompatActivity {
                 findViewById(R.id.verifyEmailButton).setEnabled(false);
 
                 // Send verification email
-                // [START send_email_verification]
                 final FirebaseUser user = mFirebaseAuth.getCurrentUser();
                 user.sendEmailVerification()
                         .addOnCompleteListener(VerifyEmailActivity.this, new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                // [START_EXCLUDE]
-                                // Re-enable button
+
                                 findViewById(R.id.verifyEmailButton).setEnabled(true);
 
                                 if (task.isSuccessful()) {
@@ -67,7 +65,6 @@ public class VerifyEmailActivity extends AppCompatActivity {
                                             "Failed to send verification email.",
                                             Toast.LENGTH_SHORT).show();
                                 }
-                                // [END_EXCLUDE]
                             }
                         });
 

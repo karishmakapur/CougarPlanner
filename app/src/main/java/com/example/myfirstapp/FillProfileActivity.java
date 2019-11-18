@@ -11,13 +11,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class FillProfileActivity extends AppCompatActivity {
 
@@ -25,12 +27,13 @@ public class FillProfileActivity extends AppCompatActivity {
     ActionBar actionBar;
     EditText nameET;
     EditText dobET;
-    DatePickerDialog.OnDateSetListener setListener;
     EditText UniET;
-    //EditText CurYearET;
     EditText GradYearET;
     EditText EmailET;
     Spinner CurrentYearSpinner;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
 
     @Override
@@ -50,7 +53,6 @@ public class FillProfileActivity extends AppCompatActivity {
         nameET = findViewById(R.id.editName);
         dobET = findViewById(R.id.editDateOfBirth);
         UniET = findViewById(R.id.editUniversity);
-        //CurYearET = findViewById(R.id.editCurrentYear);
         GradYearET = findViewById(R.id.editExpectedGraduationDate);
         EmailET = findViewById(R.id.editEmail);
         CurrentYearSpinner = findViewById(R.id.CurrentYearSpinner);
@@ -80,28 +82,16 @@ public class FillProfileActivity extends AppCompatActivity {
                 user.setImageURL("default");
 
 
-                new FirebaseDatabaseHelperUser().addUser(user, new FirebaseDatabaseHelperUser.UserStatus() {
-                    @Override
-                    public void UserIsLoaded(List<User> users, List<String> keys) {
+                mDatabase = FirebaseDatabase.getInstance();
+                databaseReference = mDatabase.getReference("users");
+                FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
+                String uid = firebaseAuth.getUid();
 
-                    }
+                if(mFirebaseUser != null)
+                {
+                    databaseReference.child(uid).setValue(user);
+                }
 
-
-                    @Override
-                    public void UserIsInserted() {
-
-                    }
-
-                    @Override
-                    public void DataIsUpdated() {
-
-                    }
-
-                    @Override
-                    public void DataIsDeleted() {
-
-                    }
-                });
 
 
                 Intent intToHome = new Intent(FillProfileActivity.this, HomeActivity.class);

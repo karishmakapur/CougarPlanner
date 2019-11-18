@@ -32,13 +32,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
     Button cancelButton;
     Button saveButton;
-    //Button deleteButton;
     TextView tvDeleteAcct;
     ActionBar actionBar;
     EditText nameET;
     EditText dobET;
     EditText uniET;
-    //EditText currYearET;
     Spinner CurrentYearSpinner;
     EditText gradYearET;
     FirebaseDatabase firebaseDatabase;
@@ -50,7 +48,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
@@ -66,10 +63,8 @@ public class EditProfileActivity extends AppCompatActivity {
         nameET = findViewById(R.id.editName);
         dobET = findViewById(R.id.editDateOfBirth);
         uniET = findViewById(R.id.editUniversity);
-        //currYearET = findViewById(R.id.editCurrentYear);
         CurrentYearSpinner = findViewById(R.id.currentYearSpinner);
         gradYearET = findViewById(R.id.editExpectedGraduationYear);
-        //deleteButton = findViewById(R.id.deleteAccountButton);
         tvDeleteAcct = findViewById(R.id.deleteAccountTV);
 
         //populate data from database to edit text and spinner fields
@@ -88,7 +83,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     nameET.setText(name);
                     dobET.setText(dob);
-                    //currYearET.setText(currYear);
                     gradYearET.setText(gradYear);
                     uniET.setText(uniname);
 
@@ -115,8 +109,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(EditProfileActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
-                //Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
-                //startActivity(intToHome);
+
                 finish();
             }
         });
@@ -142,8 +135,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 databaseReference.child("gradyr").setValue(gradYearET.getText().toString());
                 databaseReference.child("uniname").setValue(uniET.getText().toString());
 
-                //Intent intToHome = new Intent(EditProfileActivity.this, HomeActivity.class);
-                //startActivity(intToHome);
                 finish();
             }
         });

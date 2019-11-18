@@ -50,6 +50,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference("users");
 
+        //setting up the recycler view for layout
         recyclerView = (RecyclerView) findViewById(R.id.FriendRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -86,7 +87,6 @@ public class AddFriendActivity extends AppCompatActivity {
     //connect search bar to database for querying when a user wants to search for a friend
     //When user searches for user, and if user exists, then display user
     // TODO: display user with the option to send friend request
-
     private void firebaseUserSearch(String searchText) {
 
         Toast.makeText(AddFriendActivity.this, "Started Search", Toast.LENGTH_LONG).show();
@@ -130,6 +130,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
         }
 
+        //setting the details for each user
         public void setDetails(String username, String useremail, String useruni){
 
             Log.d("TAG", "setDetails: " + username + useremail + useruni);
@@ -143,9 +144,6 @@ public class AddFriendActivity extends AppCompatActivity {
             userUni.setText(useruni);
 
             Log.d("TAG", "setDetails: " + userName.getText().toString() + userEmail.getText().toString() + userUni.getText().toString());
-
-
-
         }
 
 

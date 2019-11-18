@@ -3,7 +3,6 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,7 +13,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.List;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class AddCourseActivity extends AppCompatActivity {
 
@@ -25,6 +27,9 @@ public class AddCourseActivity extends AppCompatActivity {
     EditText courseNameET;
     EditText meetingDaysET;
     EditText instructorET;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,32 +82,10 @@ public class AddCourseActivity extends AppCompatActivity {
                 course.setInstructor(instructorET.getText().toString());
                 course.setMeetingDays(meetingDaysET.getText().toString());
 
-                new FirebaseDatabaseHelperCourse().addCourse(course, new FirebaseDatabaseHelperCourse.CourseStatus(){
-                    @Override
-                    public void CourseIsLoaded(List<Course> courses, List<String> keys) {
-
-                    }
-
-
-                    @Override
-                    public void CourseIsInserted() {
-
-                    }
-
-                    @Override
-                    public void DataIsUpdated() {
-
-                    }
-
-                    @Override
-                    public void DataIsDeleted() {
-
-                    }
-                });
-
-
-                //Intent intToHome = new Intent(AddCourseActivity.this, HomeActivity.class);
-                //startActivity(intToHome);
+                mDatabase = FirebaseDatabase.getInstance();
+                String uid = firebaseAuth.getUid();
+                databaseReference = mDatabase.getReference("courses/" + uid);
+                databaseReference.child(course.getCourseName()).setValue(course);
                 finish();
             }
         });
