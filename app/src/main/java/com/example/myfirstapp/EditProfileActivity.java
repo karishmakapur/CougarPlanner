@@ -30,20 +30,19 @@ import com.google.firebase.database.ValueEventListener;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    Button cancelButton;
-    Button saveButton;
-    TextView tvDeleteAcct;
-    ActionBar actionBar;
-    EditText nameET;
-    EditText dobET;
-    EditText uniET;
-    Spinner CurrentYearSpinner;
-    EditText gradYearET;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    private Button cancelButton;
+    private Button saveButton;
+    private TextView tvDeleteAcct;
+    private ActionBar actionBar;
+    private EditText nameET;
+    private EditText dobET;
+    private EditText uniET;
+    private Spinner CurrentYearSpinner;
+    private EditText gradYearET;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    String uid = firebaseAuth.getUid();
-
+    private String uid = firebaseAuth.getUid();
 
 
     @Override
@@ -119,23 +118,51 @@ public class EditProfileActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(EditProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
-                User user = new User();
-                user.setName(nameET.getText().toString());
-                user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
-                user.setDob(dobET.getText().toString());
-                user.setGradyr(gradYearET.getText().toString());
-                user.setUniname(uniET.getText().toString());
+                // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
+                if (nameET.getText().toString().isEmpty()) {
+                    nameET.setError("Please enter your name");
+                    nameET.requestFocus();
+                }
+                if (dobET.getText().toString().isEmpty() || !dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")) {
+                    dobET.setError("Please enter your date of birth in the format MM/DD/YYYY");
+                    dobET.requestFocus();
+                }
+                if (gradYearET.getText().toString().isEmpty()) {
+                    gradYearET.setError("Please enter your expected graduation year");
+                    gradYearET.requestFocus();
+                }
+                if (CurrentYearSpinner.getSelectedItem().toString().equals("Current Year")) {
+                    ((TextView) CurrentYearSpinner.getSelectedView()).setError("Please choose a college level");
+                    CurrentYearSpinner.requestFocus();
+                }
+                if (uniET.getText().toString().isEmpty()) {
+                    uniET.setError("Please enter your university");
+                    uniET.requestFocus();
+                }
+                if (!nameET.getText().toString().isEmpty()
+                        && (!dobET.getText().toString().isEmpty() && dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
+                        && !gradYearET.getText().toString().isEmpty()
+                        && !CurrentYearSpinner.getSelectedItem().toString().equals("Current Year") && !uniET.getText().toString().isEmpty()) {
+
+                    Toast.makeText(EditProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
+
+                    User user = new User();
+                    user.setName(nameET.getText().toString());
+                    user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
+                    user.setDob(dobET.getText().toString());
+                    user.setGradyr(gradYearET.getText().toString());
+                    user.setUniname(uniET.getText().toString());
 
 
-                databaseReference.child("name").setValue(nameET.getText().toString());
-                databaseReference.child("currYear").setValue(CurrentYearSpinner.getSelectedItem().toString());
-                databaseReference.child("dob").setValue(dobET.getText().toString());
-                databaseReference.child("gradyr").setValue(gradYearET.getText().toString());
-                databaseReference.child("uniname").setValue(uniET.getText().toString());
+                    databaseReference.child("name").setValue(nameET.getText().toString());
+                    databaseReference.child("currYear").setValue(CurrentYearSpinner.getSelectedItem().toString());
+                    databaseReference.child("dob").setValue(dobET.getText().toString());
+                    databaseReference.child("gradyr").setValue(gradYearET.getText().toString());
+                    databaseReference.child("uniname").setValue(uniET.getText().toString());
 
-                finish();
+                    finish();
+                }
             }
         });
 
@@ -143,8 +170,8 @@ public class EditProfileActivity extends AppCompatActivity {
         tvDeleteAcct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intToDelete = new Intent(EditProfileActivity.this, DeleteAccountActivity.class);
-               startActivity(intToDelete);
+                Intent intToDelete = new Intent(EditProfileActivity.this, DeleteAccountActivity.class);
+                startActivity(intToDelete);
             }
         });
     }

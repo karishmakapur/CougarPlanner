@@ -29,14 +29,14 @@ import java.util.ArrayList;
 
 public class ViewActivity extends AppCompatActivity {
 
-    Button backButton;
-    ActionBar actionBar;
+    private Button backButton;
+    private ActionBar actionBar;
     private TextView noTasks;
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    String uid = firebaseAuth.getUid();
-    ArrayList<Task> tasks = new ArrayList<>();
+    private String uid = firebaseAuth.getUid();
+    private ArrayList<Task> tasks = new ArrayList<>();
     private RecyclerView recyclerView;
 
     @Override

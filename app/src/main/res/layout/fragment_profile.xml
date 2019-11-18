@@ -78,7 +78,7 @@
         android:layout_height="26dp"
         android:gravity="center"
         android:text="@string/users_name"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

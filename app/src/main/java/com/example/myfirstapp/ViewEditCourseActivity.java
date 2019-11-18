@@ -29,21 +29,21 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ViewEditCourseActivity extends AppCompatActivity {
 
-    TextView courseNameTV;
-    EditText meetingET;
-    EditText instructorET;
-    Spinner spinnerColor;
-    Button savecourseButton;
-    Button cancelButton;
-    Button deleteBttn;
-    Button viewTasks;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    private TextView courseNameTV;
+    private EditText meetingET;
+    private EditText instructorET;
+    private Spinner spinnerColor;
+    private Button savecourseButton;
+    private Button cancelButton;
+    private Button deleteBttn;
+    private Button viewTasks;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    String uid = firebaseAuth.getUid();
+    private String uid = firebaseAuth.getUid();
     private String selectedCourseID;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    ActionBar actionBar;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private ActionBar actionBar;
 
 
     @Override
@@ -109,20 +109,38 @@ public class ViewEditCourseActivity extends AppCompatActivity {
         savecourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ViewEditCourseActivity.this, "You clicked the save a course button!", Toast.LENGTH_SHORT).show();
 
-                Course course = new Course();
-                course.setMeetingDays(meetingET.getText().toString());
-                course.setInstructor(instructorET.getText().toString());
-                course.setColor(spinnerColor.getSelectedItem().toString());
+                // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
+                if (instructorET.getText().toString().isEmpty()) {
+                    instructorET.setError("Please the instructor name");
+                    instructorET.requestFocus();
+                }
+                if (meetingET.getText().toString().isEmpty()) {
+                    meetingET.setError("Please enter the meeting days");
+                    meetingET.requestFocus();
+                }
+                if (spinnerColor.getSelectedItem().toString().equals("Choose a color")) {
+                    ((TextView) spinnerColor.getSelectedView()).setError("Please choose a color");
+                    spinnerColor.requestFocus();
+                }
+                if (!instructorET.getText().toString().isEmpty() && !meetingET.getText().toString().isEmpty()
+                        && !spinnerColor.getSelectedItem().toString().equals("Choose a color")) {
+
+                    Toast.makeText(ViewEditCourseActivity.this, "You clicked the save a course button!", Toast.LENGTH_SHORT).show();
+
+                    Course course = new Course();
+                    course.setMeetingDays(meetingET.getText().toString());
+                    course.setInstructor(instructorET.getText().toString());
+                    course.setColor(spinnerColor.getSelectedItem().toString());
 
 
-                databaseReference.child("meetingDays").setValue(meetingET.getText().toString());
-                databaseReference.child("instructor").setValue(instructorET.getText().toString());
-                databaseReference.child("color").setValue(spinnerColor.getSelectedItem().toString());
+                    databaseReference.child("meetingDays").setValue(meetingET.getText().toString());
+                    databaseReference.child("instructor").setValue(instructorET.getText().toString());
+                    databaseReference.child("color").setValue(spinnerColor.getSelectedItem().toString());
 
 
-                finish();
+                    finish();
+                }
             }
         });
 

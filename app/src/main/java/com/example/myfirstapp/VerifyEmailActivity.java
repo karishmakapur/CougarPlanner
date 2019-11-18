@@ -22,10 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class VerifyEmailActivity extends AppCompatActivity {
 
-    FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
-    Button verifyEmailButton;
-    Button verifiedEmail;
-    ActionBar actionBar;
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    private Button verifyEmailButton;
+    private Button verifiedEmail;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +76,7 @@ public class VerifyEmailActivity extends AppCompatActivity {
                         mFirebaseAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+
                                 if (user.isEmailVerified()) {
                                     startActivity(new Intent(VerifyEmailActivity.this, FillProfileActivity.class));
                                 } else {

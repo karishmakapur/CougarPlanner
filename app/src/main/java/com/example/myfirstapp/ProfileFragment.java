@@ -1,6 +1,5 @@
 package com.example.myfirstapp;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -25,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 
@@ -54,13 +52,13 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment {
 
 
-    Button ViewFriendButton;
-    Button ViewCourseButton;
-    Button searchFriendButton;
-    Button addCourseButton;
-    Button logoutButton;
-    Button editProfileButton;
-    TextView usersName;
+    private Button ViewFriendButton;
+    private Button ViewCourseButton;
+    private Button searchFriendButton;
+    private Button addCourseButton;
+    private Button logoutButton;
+    private Button editProfileButton;
+    private TextView usersName;
     private TextView noCourses;
 
 

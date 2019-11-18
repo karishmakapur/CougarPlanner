@@ -23,10 +23,10 @@ import com.google.firebase.database.Query;
 
 public class AddFriendActivity extends AppCompatActivity {
 
-    Button backButton;
-    Button searchBttn;
-    EditText searchET;
-    ActionBar actionBar;
+    private Button backButton;
+    private Button searchBttn;
+    private EditText searchET;
+    private ActionBar actionBar;
 
     private RecyclerView recyclerView;
 

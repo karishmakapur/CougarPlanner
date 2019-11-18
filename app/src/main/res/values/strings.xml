@@ -71,6 +71,7 @@
     <string name="app_icon">App Icon</string>
     <string name="no_tasks_due_today">No Tasks Due Today</string>
     <string-array name="Colors">
+            <item>Choose a color</item>
             <item>Pink</item>
             <item>Red</item>
             <item>Orange</item>

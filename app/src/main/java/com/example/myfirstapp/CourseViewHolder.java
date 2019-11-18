@@ -1,8 +1,6 @@
 package com.example.myfirstapp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;

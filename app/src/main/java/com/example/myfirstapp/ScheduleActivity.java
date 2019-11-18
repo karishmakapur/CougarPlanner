@@ -29,10 +29,10 @@ import java.util.ArrayList;
 
 public class ScheduleActivity extends AppCompatActivity {
 
-    ActionBar actionBar;
-    Button backButton;
-    CalendarView calendarView;
-    Button addTaskButton;
+    private ActionBar actionBar;
+    private Button backButton;
+    private CalendarView calendarView;
+    private Button addTaskButton;
 
 
     @Override

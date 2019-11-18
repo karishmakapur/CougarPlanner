@@ -23,15 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     //ask user for their email, name, username, password, date of birth, university
     // name, current year at the university, and expected graduation date. Add info to their profile database
-    EditText emailId, password;
-    Button btnSignUp;
-    TextView tvSignIn;
-    FirebaseAuth mFirebaseAuth;
-    ActionBar actionBar;
+    private EditText emailId, password;
+    private Button btnSignUp;
+    private TextView tvSignIn;
+    private FirebaseAuth mFirebaseAuth;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

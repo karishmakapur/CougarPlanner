@@ -16,7 +16,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class TaskViewHolder extends RecyclerView.ViewHolder {
-    View mView;
+
+    private View mView;
 
 
     public TaskViewHolder(View itemView) {

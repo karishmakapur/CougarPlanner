@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,15 +28,15 @@ import java.util.List;
 
 public class AddTaskActivity extends AppCompatActivity {
 
-    ActionBar actionBar;
-    Spinner PrioritySpinner;
-    Button cancelButton;
-    Button submitTask;
-    EditText TaskNameET;
-    Spinner CourseNameSpinner;
-    EditText DueDateET;
-    EditText NotesET;
-    ArrayList<String> courseNames = new ArrayList<>();
+    private ActionBar actionBar;
+    private Spinner PrioritySpinner;
+    private Button cancelButton;
+    private Button submitTask;
+    private EditText TaskNameET;
+    private Spinner CourseNameSpinner;
+    private EditText DueDateET;
+    private EditText NotesET;
+    private ArrayList<String> courseNames = new ArrayList<>();
     private FirebaseDatabase mDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -61,17 +62,16 @@ public class AddTaskActivity extends AppCompatActivity {
         NotesET = findViewById(R.id.editNotes);
 
 
-
         //populate priority spinner with correct data
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(AddTaskActivity.this,android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.PriorityLevel));
+                new ArrayAdapter<>(AddTaskActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.PriorityLevel));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         PrioritySpinner.setAdapter(adapter);
 
 
         //populate course spinner with correct data
         final ArrayAdapter<String> adapter2 =
-                new ArrayAdapter<>(AddTaskActivity.this,android.R.layout.simple_spinner_item, courseNames);
+                new ArrayAdapter<>(AddTaskActivity.this, android.R.layout.simple_spinner_item, courseNames);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         CourseNameSpinner.setAdapter(adapter2);
 
@@ -85,7 +85,7 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    for (DataSnapshot d : dataSnapshot.getChildren()){
+                    for (DataSnapshot d : dataSnapshot.getChildren()) {
                         Course course = d.getValue(Course.class);
                         courseNames.add(course.getCourseName());
                         adapter2.notifyDataSetChanged();
@@ -102,32 +102,57 @@ public class AddTaskActivity extends AppCompatActivity {
 
         //When user clicks the "Add Task" button, add the task to the users database and connect to course
         //error handling: ensure a course exists: this is done with the drop down of courses
-        submitTask.setOnClickListener(new View.OnClickListener(){
+        submitTask.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Toast.makeText(AddTaskActivity.this, "You clicked the submit a task button!", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
 
-                Task task = new Task();
-                task.setTaskName(TaskNameET.getText().toString());
-                task.setCourse(CourseNameSpinner.getSelectedItem().toString());
-                task.setDueDate(DueDateET.getText().toString());
-                task.setPriorityLevel(PrioritySpinner.getSelectedItem().toString());
-                task.setNotes(NotesET.getText().toString());
-                task.setCompleted("false");
+                // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
+                if (TaskNameET.getText().toString().isEmpty()) {
+                    TaskNameET.setError("Please enter a task name");
+                    TaskNameET.requestFocus();
+                }
+                if (DueDateET.getText().toString().isEmpty() || !DueDateET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")) {
+                    DueDateET.setError("Please the due date in the format MM/DD/YYYY");
+                    DueDateET.requestFocus();
+                }
+                if (PrioritySpinner.getSelectedItem().toString().equals("Priority Level")) {
+                    ((TextView) PrioritySpinner.getSelectedView()).setError("Please choose a priority level");
+                    PrioritySpinner.requestFocus();
+                }
+                if (!TaskNameET.getText().toString().isEmpty()
+                        && (!DueDateET.getText().toString().isEmpty() && DueDateET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
+                        && !PrioritySpinner.getSelectedItem().toString().equals("Priority Level")) {
 
-                String uid = firebaseAuth.getUid();
-                mDatabase = FirebaseDatabase.getInstance();
-                databaseReference = mDatabase.getReference("tasks/" + uid);
-                databaseReference.child(task.getTaskName()).setValue(task);
-                Log.d(null, "addTask: task course name: " + task.getCourse());
-                finish();
+                    Toast.makeText(AddTaskActivity.this, "You clicked the submit a task button!", Toast.LENGTH_SHORT).show();
+
+                    Task task = new Task();
+                    task.setTaskName(TaskNameET.getText().toString());
+                    task.setCourse(CourseNameSpinner.getSelectedItem().toString());
+                    task.setDueDate(DueDateET.getText().toString());
+                    task.setPriorityLevel(PrioritySpinner.getSelectedItem().toString());
+
+                    if (NotesET.getText().toString().isEmpty()) {
+                        task.setNotes("No Notes");
+                    } else {
+                        task.setNotes(NotesET.getText().toString());
+                    }
+
+                    task.setCompleted("false");
+
+                    String uid = firebaseAuth.getUid();
+                    mDatabase = FirebaseDatabase.getInstance();
+                    databaseReference = mDatabase.getReference("tasks/" + uid);
+                    databaseReference.child(task.getTaskName()).setValue(task);
+                    Log.d(null, "addTask: task course name: " + task.getCourse());
+                    finish();
+                }
             }
         });
 
         //handle cancel button
-        cancelButton.setOnClickListener(new View.OnClickListener(){
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(AddTaskActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
                 finish();
             }

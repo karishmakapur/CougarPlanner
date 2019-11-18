@@ -9,8 +9,8 @@
 
     <EditText
         android:id="@+id/editNotes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="201dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:hint="Notes"
         android:inputType="textPersonName"
@@ -29,7 +29,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".09"
+        app:layout_constraintHorizontal_bias=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".58" />
@@ -42,7 +42,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".09"
+        app:layout_constraintHorizontal_bias=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".72" />
@@ -63,30 +63,32 @@
         app:layout_constraintVertical_bias="0.055" />
 
     <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="87dp"
+        android:layout_height="38dp"
+        android:background="@drawable/button"
+        android:text="@string/cancel"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.673"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.884" />
+
+    <Button
         android:id="@+id/addTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#A3DDB0"
+        android:layout_width="87dp"
+        android:layout_height="38dp"
+        android:background="@drawable/button"
         android:text="Add Task"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.281"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
-
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#A3DDB0"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.674"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+        app:layout_constraintVertical_bias="0.884" />
 
     <TextView
         android:id="@+id/textView8"
@@ -96,7 +98,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".09"
+        app:layout_constraintHorizontal_bias=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".16" />
@@ -109,7 +111,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".09"
+        app:layout_constraintHorizontal_bias=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".30" />
@@ -122,15 +124,15 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".09"
+        app:layout_constraintHorizontal_bias=".08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".44" />
 
     <EditText
         android:id="@+id/editTaskName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="201dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="textPersonName"
@@ -143,8 +145,8 @@
 
     <Spinner
         android:id="@+id/editTaskCourseName"
-        android:layout_width="207dp"
-        android:layout_height="42dp"
+        android:layout_width="201dp"
+        android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.877"
@@ -154,8 +156,8 @@
 
     <EditText
         android:id="@+id/editTaskDueDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="201dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:hint="MM/DD/YYYY"
         android:inputType="textPersonName"
@@ -168,8 +170,8 @@
 
     <Spinner
         android:id="@+id/prioritySpinner"
-        android:layout_width="207dp"
-        android:layout_height="42dp"
+        android:layout_width="201dp"
+        android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.877"

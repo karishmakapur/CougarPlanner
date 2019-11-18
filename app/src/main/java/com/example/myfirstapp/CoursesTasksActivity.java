@@ -28,14 +28,14 @@ import java.util.ArrayList;
 
 public class CoursesTasksActivity extends AppCompatActivity {
 
-    ActionBar actionBar;
+    private ActionBar actionBar;
     private String selectedCourseID;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    String uid = firebaseAuth.getUid();
-    ArrayList<Task> tasks = new ArrayList<>();
-    TextView noTasks;
+    private String uid = firebaseAuth.getUid();
+    private ArrayList<Task> tasks = new ArrayList<>();
+    private TextView noTasks;
     private RecyclerView recyclerView;
-    Button backButton;
+    private Button backButton;
 
 
 

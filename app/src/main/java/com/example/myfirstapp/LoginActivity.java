@@ -21,17 +21,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText emailId, password;
-    Button btnSignIn;
-    TextView tvSignUp;
-    TextView tvForgotPassword;
+
+    private EditText emailId, password;
+    private Button btnSignIn;
+    private TextView tvSignUp;
+    private TextView tvForgotPassword;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    ActionBar actionBar;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 

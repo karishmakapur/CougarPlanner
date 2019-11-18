@@ -86,11 +86,11 @@
         app:layout_constraintVertical_bias="0.433" />
 
     <Button
-        android:gravity="center"
         android:id="@+id/saveProfileButton"
         android:layout_width="104dp"
         android:layout_height="45dp"
-        android:background="#92B5E6"
+        android:background="#6B9BEB"
+        android:gravity="center"
         android:text="@string/save_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

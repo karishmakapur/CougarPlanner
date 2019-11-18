@@ -20,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    ActionBar actionBar;
-    EditText email;
-    Button resetPassword;
+    private ActionBar actionBar;
+    private EditText email;
+    private Button resetPassword;
 
 
     @Override

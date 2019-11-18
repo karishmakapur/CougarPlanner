@@ -33,7 +33,7 @@ import java.util.Calendar;
 
 public class DashboardFragment extends Fragment {
 
-    Button viewSchedule;
+    private Button viewSchedule;
     private TextView currentDateTV;
     private TextView noTasks;
     private Calendar calendar;
@@ -43,8 +43,8 @@ public class DashboardFragment extends Fragment {
     private DatabaseReference databaseReference;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    String uid = firebaseAuth.getUid();
-    ArrayList<Task> tasks = new ArrayList<>();
+    private String uid = firebaseAuth.getUid();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
 
     public DashboardFragment() {

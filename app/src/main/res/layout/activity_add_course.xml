@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".AddCourseActivity">
 
     <TextView
@@ -44,7 +45,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.77" />
@@ -57,7 +58,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.608" />
@@ -70,7 +71,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.251" />
@@ -83,7 +84,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.426" />
@@ -94,15 +95,15 @@
         android:layout_height="46dp"
         android:bufferType="editable"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/name_of_course_input"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <EditText
         android:id="@+id/editMeetingDays"
@@ -110,15 +111,15 @@
         android:layout_height="46dp"
         android:bufferType="editable"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/meeting_days"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.423" />
 
     <EditText
         android:id="@+id/editInstructorName"
@@ -126,22 +127,23 @@
         android:layout_height="46dp"
         android:bufferType="editable"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/instructor_name"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.609"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.609" />
 
     <Button
         android:id="@+id/submitCourseButton"
         android:layout_width="95dp"
         android:layout_height="48dp"
-        android:background="#A3DDB0"
+        android:background="@drawable/button"
         android:text="@string/add_course"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.155"
@@ -153,8 +155,9 @@
         android:id="@+id/cancelButton"
         android:layout_width="95dp"
         android:layout_height="48dp"
-        android:background="#A3DDB0"
+        android:background="@drawable/button"
         android:text="@string/cancel"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.756"

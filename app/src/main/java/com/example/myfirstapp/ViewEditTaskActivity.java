@@ -31,22 +31,21 @@ import java.util.ArrayList;
 public class ViewEditTaskActivity extends AppCompatActivity {
 
     private String selectedTaskID;
-    TextView taskName;
-    Spinner editCoursename;
-    EditText editduedate;
-    Spinner changepriority;
-    EditText editnotes;
-    Button saveTaskButton;
-    Button cancelButton;
-    Button deleteBttn;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    private TextView taskName;
+    private Spinner editCoursename;
+    private EditText editduedate;
+    private Spinner changepriority;
+    private EditText editnotes;
+    private Button saveTaskButton;
+    private Button cancelButton;
+    private Button deleteBttn;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    String uid = firebaseAuth.getUid();
-    ArrayList<String> courseNames = new ArrayList<>();
-    CheckBox completeCheck;
-    ActionBar actionBar;
-
+    private String uid = firebaseAuth.getUid();
+    private ArrayList<String> courseNames = new ArrayList<>();
+    private CheckBox completeCheck;
+    private ActionBar actionBar;
 
 
     @Override
@@ -81,7 +80,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     String course = dataSnapshot.child("course").getValue().toString();
                     String duedate = dataSnapshot.child("dueDate").getValue().toString();
                     String notes = dataSnapshot.child("notes").getValue().toString();
@@ -90,8 +89,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                     String complete = dataSnapshot.child("completed").getValue().toString();
 
 
-                    if(complete.equals("true"))
-                    {
+                    if (complete.equals("true")) {
                         completeCheck.setChecked(true);
                     }
                     editduedate.setText(duedate);
@@ -124,7 +122,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                for (DataSnapshot d : dataSnapshot.getChildren()){
+                                for (DataSnapshot d : dataSnapshot.getChildren()) {
                                     Course course = d.getValue(Course.class);
                                     courseNames.add(course.getCourseName());
                                     adapter2.notifyDataSetChanged();
@@ -140,8 +138,6 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                     });
 
 
-
-
                 }
 
             }
@@ -155,40 +151,62 @@ public class ViewEditTaskActivity extends AppCompatActivity {
 
         //handling users request to add a course
         //When user clicks the "Add Task" button, add the task to the users database and connect to course
-       saveTaskButton.setOnClickListener(new View.OnClickListener(){
+        saveTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                Toast.makeText(ViewEditTaskActivity.this, "You clicked the save a task button!", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
 
-                Task task = new Task();
-                task.setTaskName(taskName.getText().toString());
-                task.setCourse(editCoursename.getSelectedItem().toString());
-                task.setDueDate(editduedate.getText().toString());
-                task.setPriorityLevel(changepriority.getSelectedItem().toString());
-                task.setNotes(editnotes.getText().toString());
-
-
-                databaseReference.child("priorityLevel").setValue(changepriority.getSelectedItem().toString());
-                databaseReference.child("notes").setValue(editnotes.getText().toString());
-                databaseReference.child("dueDate").setValue(editduedate.getText().toString());
-                databaseReference.child("course").setValue(editCoursename.getSelectedItem().toString());
-                if(completeCheck.isChecked()) {
-                    databaseReference.child("completed").setValue("true");
+                if (taskName.getText().toString().isEmpty()) {
+                    taskName.setError("Please enter a task name");
+                    taskName.requestFocus();
                 }
-                else
-                {
-                    databaseReference.child("completed").setValue("false");
+                if (editduedate.getText().toString().isEmpty() || !editduedate.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")) {
+                    editduedate.setError("Please the due date in the format MM/DD/YYYY");
+                    editduedate.requestFocus();
                 }
+                if (changepriority.getSelectedItem().toString().equals("Priority Level")) {
+                    ((TextView) changepriority.getSelectedView()).setError("Please choose a priority level");
+                    changepriority.requestFocus();
+                }
+                if (!taskName.getText().toString().isEmpty()
+                        && (!editduedate.getText().toString().isEmpty() && editduedate.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
+                        && !changepriority.getSelectedItem().toString().equals("Priority Level")) {
+
+                    Toast.makeText(ViewEditTaskActivity.this, "You clicked the save a task button!", Toast.LENGTH_SHORT).show();
+
+                    Task task = new Task();
+                    task.setTaskName(taskName.getText().toString());
+                    task.setCourse(editCoursename.getSelectedItem().toString());
+                    task.setDueDate(editduedate.getText().toString());
+                    task.setPriorityLevel(changepriority.getSelectedItem().toString());
+
+                    if (editnotes.getText().toString().isEmpty()) {
+                        task.setNotes("No Notes");
+                    } else {
+                        task.setNotes(editnotes.getText().toString());
+                    }
 
 
-                finish();
+                    databaseReference.child("priorityLevel").setValue(changepriority.getSelectedItem().toString());
+                    databaseReference.child("notes").setValue(editnotes.getText().toString());
+                    databaseReference.child("dueDate").setValue(editduedate.getText().toString());
+                    databaseReference.child("course").setValue(editCoursename.getSelectedItem().toString());
+
+                    if (completeCheck.isChecked()) {
+                        databaseReference.child("completed").setValue("true");
+                    } else {
+                        databaseReference.child("completed").setValue("false");
+                    }
+
+
+                    finish();
+                }
             }
         });
 
         //handle cancel button
-        cancelButton.setOnClickListener(new View.OnClickListener(){
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(ViewEditTaskActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
 
 
@@ -197,9 +215,9 @@ public class ViewEditTaskActivity extends AppCompatActivity {
         });
 
         //handle delete button
-        deleteBttn.setOnClickListener(new View.OnClickListener(){
+        deleteBttn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(ViewEditTaskActivity.this, "You clicked the delete button!", Toast.LENGTH_SHORT).show();
                 databaseReference.removeValue();
 
@@ -207,7 +225,6 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
 
     }

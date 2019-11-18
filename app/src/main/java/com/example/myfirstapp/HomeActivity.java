@@ -25,8 +25,8 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
 
     private NavController navController;
-    BottomNavigationView bottomNavigationView;
-    ActionBar actionBar;
+    private BottomNavigationView bottomNavigationView;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

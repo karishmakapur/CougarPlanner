@@ -64,10 +64,11 @@
 
     <Button
         android:id="@+id/saveTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#A3DDB0"
+        android:layout_width="90dp"
+        android:layout_height="43dp"
+        android:background="@drawable/button"
         android:text="Save Task"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
@@ -77,10 +78,11 @@
 
     <Button
         android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#A3DDB0"
+        android:layout_width="90dp"
+        android:layout_height="43dp"
+        android:background="@drawable/button"
         android:text="@string/cancel"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,10 +91,11 @@
 
     <Button
         android:id="@+id/deleteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#A3DDB0"
+        android:layout_width="90dp"
+        android:layout_height="43dp"
+        android:background="@drawable/button"
         android:text="delete"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"

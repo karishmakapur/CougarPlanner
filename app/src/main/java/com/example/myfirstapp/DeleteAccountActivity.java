@@ -26,11 +26,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DeleteAccountActivity extends AppCompatActivity {
 
-    ActionBar actionBar;
-    EditText email;
-    EditText password;
-    Button delete;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private ActionBar actionBar;
+    private EditText email;
+    private EditText password;
+    private Button cancel;
+    private Button delete;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,50 +46,69 @@ public class DeleteAccountActivity extends AppCompatActivity {
         email = findViewById(R.id.emailEdit);
         password = findViewById(R.id.passwordEdit);
         delete = findViewById(R.id.deleteAccount);
+        cancel = findViewById(R.id.buttoncancel);
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get auth credentials from the user for re-authentication.
-                AuthCredential credential = EmailAuthProvider
-                        .getCredential(email.getText().toString(), password.getText().toString());
 
-                user.reauthenticate(credential)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
-                                Log.d("TAG", "User re-authenticated.");
-
-                            }
-                        });
-
-                DatabaseReference usersCourses = FirebaseDatabase.getInstance().getReference("courses/" + user.getUid());
-                DatabaseReference usersTasks = FirebaseDatabase.getInstance().getReference("tasks/" + user.getUid());
-                DatabaseReference usersProfile = FirebaseDatabase.getInstance().getReference("users/" + user.getUid());
-
-                if(usersCourses != null) {
-                    usersCourses.removeValue();
+                // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
+                if (email.getText().toString().isEmpty()) {
+                    email.setError("Please enter your email");
+                    email.requestFocus();
                 }
-                if(usersTasks != null){
-                    usersTasks.removeValue();
+                if (password.getText().toString().isEmpty()) {
+                    password.setError("Please your password");
+                    password.requestFocus();
                 }
-                if (usersProfile != null) {
-                    usersProfile.removeValue();
-                }
+                if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
+                    // Get auth credentials from the user for re-authentication.
+                    AuthCredential credential = EmailAuthProvider
+                            .getCredential(email.getText().toString(), password.getText().toString());
 
-                user.delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Log.d("TAG", "User account deleted.");
-                                    Toast.makeText(DeleteAccountActivity.this, "Your account has been deleted", Toast.LENGTH_SHORT).show();
-                                    Intent intToMain = new Intent(DeleteAccountActivity.this, MainActivity.class);
-                                    startActivity(intToMain);
+                    user.reauthenticate(credential)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                                    Log.d("TAG", "User re-authenticated.");
+
                                 }
-                            }
-                        });
+                            });
 
+                    DatabaseReference usersCourses = FirebaseDatabase.getInstance().getReference("courses/" + user.getUid());
+                    DatabaseReference usersTasks = FirebaseDatabase.getInstance().getReference("tasks/" + user.getUid());
+                    DatabaseReference usersProfile = FirebaseDatabase.getInstance().getReference("users/" + user.getUid());
+
+                    if (usersCourses != null) {
+                        usersCourses.removeValue();
+                    }
+                    if (usersTasks != null) {
+                        usersTasks.removeValue();
+                    }
+                    if (usersProfile != null) {
+                        usersProfile.removeValue();
+                    }
+
+                    user.delete()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("TAG", "User account deleted.");
+                                        Toast.makeText(DeleteAccountActivity.this, "Your account has been deleted", Toast.LENGTH_SHORT).show();
+                                        Intent intToMain = new Intent(DeleteAccountActivity.this, MainActivity.class);
+                                        startActivity(intToMain);
+                                    }
+                                }
+                            });
+
+                }
             }
         });
 

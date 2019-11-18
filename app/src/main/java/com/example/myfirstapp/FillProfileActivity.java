@@ -24,14 +24,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FillProfileActivity extends AppCompatActivity {
 
-    Button saveButton;
-    ActionBar actionBar;
-    EditText nameET;
-    EditText dobET;
-    EditText UniET;
-    EditText GradYearET;
-    EditText EmailET;
-    Spinner CurrentYearSpinner;
+    private Button saveButton;
+    private ActionBar actionBar;
+    private EditText nameET;
+    private EditText dobET;
+    private EditText UniET;
+    private EditText GradYearET;
+    private EditText EmailET;
+    private Spinner CurrentYearSpinner;
     private FirebaseDatabase mDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -70,7 +70,6 @@ public class FillProfileActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(FillProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
                 // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
                 if(nameET.getText().toString().isEmpty()){
@@ -97,9 +96,12 @@ public class FillProfileActivity extends AppCompatActivity {
                     UniET.setError("Please enter your university");
                     UniET.requestFocus();
                 }
-                if(!nameET.getText().toString().isEmpty() && !dobET.getText().toString().isEmpty()
+                if(!nameET.getText().toString().isEmpty()
+                        && (!dobET.getText().toString().isEmpty() && dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
                         && !EmailET.getText().toString().isEmpty() && !GradYearET.getText().toString().isEmpty()
-                        && !CurrentYearSpinner.getSelectedItem().toString().isEmpty() && !UniET.getText().toString().isEmpty()){
+                        && !CurrentYearSpinner.getSelectedItem().toString().equals("Current Year") && !UniET.getText().toString().isEmpty()){
+
+                    Toast.makeText(FillProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
                     User user = new User();
                     user.setName(nameET.getText().toString());
