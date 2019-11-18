@@ -155,7 +155,6 @@ public class ViewEditTaskActivity extends AppCompatActivity {
 
         //handling users request to add a course
         //When user clicks the "Add Task" button, add the task to the users database and connect to course
-        //TODO: error handling: if user enters course that doesn't exist: it should tell user they need to create course
        saveTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -204,7 +203,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                 Toast.makeText(ViewEditTaskActivity.this, "You clicked the delete button!", Toast.LENGTH_SHORT).show();
                 databaseReference.removeValue();
 
-               
+
                 finish();
             }
         });

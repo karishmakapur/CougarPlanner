@@ -143,7 +143,7 @@
         android:layout_width="201dp"
         android:layout_height="46dp"
         android:gravity="center"
-        android:hint="@string/date_of_birth"
+        android:hint="MM/DD/YYYY"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

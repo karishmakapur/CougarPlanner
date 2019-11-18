@@ -95,7 +95,6 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         //profile picture image button.
-        // TODO: allow user to switch image with this button
         storageReference = FirebaseStorage.getInstance().getReference();
 
         //getting all references
@@ -104,7 +103,7 @@ public class ProfileFragment extends Fragment {
         CourseRecyclerView = view.findViewById(R.id.CourseRecyclerView);
         searchFriendButton = view.findViewById(R.id.addFriendButton);
         addCourseButton = view.findViewById(R.id.AddCourseButton);
-        editProfileButton = view.findViewById(R.id.EditProfileButton);
+        editProfileButton = view.findViewById(R.id.EditProfileButton); // allow user to switch image with this button
         ViewFriendButton = view.findViewById(R.id.friendButton);
         ViewCourseButton = view.findViewById(R.id.courseButton);
         logoutButton = view.findViewById(R.id.LogoutButton);

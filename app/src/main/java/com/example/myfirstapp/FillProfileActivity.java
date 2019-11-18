@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,37 +66,64 @@ public class FillProfileActivity extends AppCompatActivity {
 
         //handle save button
         // update the users information in the database upon save
-        // TODO: add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
+
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Toast.makeText(FillProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
-
-                User user = new User();
-                user.setName(nameET.getText().toString());
-                user.setDob(dobET.getText().toString());
-                user.setEmail(EmailET.getText().toString());
-                user.setGradyr(GradYearET.getText().toString());
-                user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
-                user.setUniname(UniET.getText().toString());
-                user.setImageURL("default");
-
-
-                mDatabase = FirebaseDatabase.getInstance();
-                databaseReference = mDatabase.getReference("users");
-                FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
-                String uid = firebaseAuth.getUid();
-
-                if(mFirebaseUser != null)
-                {
-                    databaseReference.child(uid).setValue(user);
+                // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
+                if(nameET.getText().toString().isEmpty()){
+                    nameET.setError("Please enter your name");
+                    nameET.requestFocus();
                 }
+                if(dobET.getText().toString().isEmpty() || !dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")){
+                    dobET.setError("Please enter your date of birth in the format MM/DD/YYYY");
+                    dobET.requestFocus();
+                }
+                if(EmailET.getText().toString().isEmpty()){
+                    EmailET.setError("Please enter your email");
+                    EmailET.requestFocus();
+                }
+                if(GradYearET.getText().toString().isEmpty()){
+                    GradYearET.setError("Please enter your expected graduation year");
+                    GradYearET.requestFocus();
+                }
+                if(CurrentYearSpinner.getSelectedItem().toString().equals("Current Year")){
+                    ((TextView)CurrentYearSpinner.getSelectedView()).setError("Please choose a college level");
+                    CurrentYearSpinner.requestFocus();
+                }
+                if(UniET.getText().toString().isEmpty()){
+                    UniET.setError("Please enter your university");
+                    UniET.requestFocus();
+                }
+                if(!nameET.getText().toString().isEmpty() && !dobET.getText().toString().isEmpty()
+                        && !EmailET.getText().toString().isEmpty() && !GradYearET.getText().toString().isEmpty()
+                        && !CurrentYearSpinner.getSelectedItem().toString().isEmpty() && !UniET.getText().toString().isEmpty()){
+
+                    User user = new User();
+                    user.setName(nameET.getText().toString());
+                    user.setDob(dobET.getText().toString());
+                    user.setEmail(EmailET.getText().toString());
+                    user.setGradyr(GradYearET.getText().toString());
+                    user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
+                    user.setUniname(UniET.getText().toString());
+                    user.setImageURL("default");
 
 
+                    mDatabase = FirebaseDatabase.getInstance();
+                    databaseReference = mDatabase.getReference("users");
+                    FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
+                    String uid = firebaseAuth.getUid();
 
-                Intent intToHome = new Intent(FillProfileActivity.this, HomeActivity.class);
-                startActivity(intToHome);
+                    if (mFirebaseUser != null) {
+                        databaseReference.child(uid).setValue(user);
+                    }
+
+
+                    Intent intToHome = new Intent(FillProfileActivity.this, HomeActivity.class);
+                    startActivity(intToHome);
+                }
             }
         });
     }
