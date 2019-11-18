@@ -275,22 +275,22 @@ public class ProfileFragment extends Fragment {
                             Toast.makeText(getContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    pd.dismiss();
-                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            pd.dismiss();
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    //calculating progress percentage
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        }
+                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            //calculating progress percentage
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
-                    //displaying percentage in progress dialog
-                    pd.setMessage("Uploaded " + ((int) progress) + "%...");
-                }
-            });
+                            //displaying percentage in progress dialog
+                            pd.setMessage("Uploaded " + ((int) progress) + "%...");
+                        }
+                    });
         } else {
             Toast.makeText(getActivity(), "No image selected...", Toast.LENGTH_SHORT).show();
         }
@@ -359,7 +359,11 @@ public class ProfileFragment extends Fragment {
             @Override
             protected void populateViewHolder(CourseViewHolder courseViewHolder, Course course, final int i) {
 
+                /*if(courses.size() == 0){
+                    return;
+                }
 
+                 */
                 Log.d("TAG", "populateViewHolder: " + courses + " i " + i);
                 courseViewHolder.setDetails(courses.get(i), getContext());
 

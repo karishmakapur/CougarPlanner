@@ -56,6 +56,7 @@ public class CoursesTasksActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.CoursesTasksRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(CoursesTasksActivity.this));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
         backButton = findViewById(R.id.backButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {

@@ -139,7 +139,9 @@ public class ViewEditCourseActivity extends AppCompatActivity {
                     databaseReference.child("color").setValue(spinnerColor.getSelectedItem().toString());
 
 
-                    finish();
+                    Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
+                    startActivity(intToHome);
+                    //finish();
                 }
             }
         });
@@ -150,7 +152,9 @@ public class ViewEditCourseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(ViewEditCourseActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
 
-                finish();
+                Intent intToHome = new Intent(ViewEditCourseActivity.this, HomeActivity.class);
+                startActivity(intToHome);
+                //finish();
             }
         });
 
@@ -176,11 +180,6 @@ public class ViewEditCourseActivity extends AppCompatActivity {
 
                     }
                 });
-
-                if (query != null) {
-                    //query.
-                }
-
 
                 databaseReference.removeValue();
 
