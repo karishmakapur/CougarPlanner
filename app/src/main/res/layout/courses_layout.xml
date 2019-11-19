@@ -9,16 +9,16 @@
         android:id="@+id/CourseNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:text="@string/courseName"
-        android:textColor="#6B9BEB"
-        android:textSize="20sp"
+        android:textColor="#505050"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
@@ -26,12 +26,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/CourseNameTextView"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="3dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:text="@string/meeting_days"
-        android:textColor="#6B9BEB"
+        android:textColor="#808080"
         android:textSize="15sp"
         android:textStyle="normal|italic" />
 
@@ -40,12 +42,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/MeetingDaysTextView"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:text="@string/instructor_name"
-        android:textColor="#6B9BEB"
+        android:textColor="#808080"
         android:textSize="15sp"
         android:textStyle="normal|italic" />
 
@@ -55,22 +59,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/InstructorNameTextView"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:paddingBottom="10dp"
         android:text="@string/colorinput"
-        android:textColor="#6B9BEB"
+        android:textColor="#808080"
         android:textSize="15sp"
         android:textStyle="normal|italic" />
 
     <TextView
         android:id="@+id/colorTV"
-        android:layout_width="28dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp" />
+        android:layout_width="32dp"
+        android:layout_height="141dp" />
 
 </RelativeLayout>

@@ -9,16 +9,15 @@
         android:id="@+id/TaskNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:text="@string/task_name"
-        android:textColor="#6B9BEB"
-        android:textSize="20sp"
+        android:textColor="#505050"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
@@ -26,12 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TaskNameTextView"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:text="@string/task_course"
-        android:textColor="#6B9BEB"
+        android:textColor="#808080"
         android:textSize="15sp"
         android:textStyle="normal|italic" />
 
@@ -40,12 +41,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TaskCourseTextView"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:text="@string/task_notes"
-        android:textColor="#6B9BEB"
+        android:textColor="#808080"
         android:textSize="15sp"
         android:textStyle="normal|italic" />
 
@@ -54,12 +57,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TaskNotesTextView"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:text="@string/task_due_date"
-        android:textColor="#6B9BEB"
+        android:textColor="#808080"
         android:textSize="15sp"
         android:textStyle="normal|italic" />
 
@@ -68,23 +73,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/taskDueTextView"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/colorTV"
+        android:layout_toRightOf="@+id/colorTV"
         android:background="#006B9BEB"
         android:paddingBottom="10dp"
         android:text="@string/task_prioirity"
-        android:textColor="#6B9BEB"
+        android:textColor="#808080"
         android:textSize="15sp"
         android:textStyle="normal|italic" />
 
     <TextView
         android:id="@+id/colorTV"
-        android:layout_width="28dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp" />
+        android:layout_width="32dp"
+        android:layout_height="150dp" />
 
 
 </RelativeLayout>
