@@ -1,5 +1,6 @@
 package com.example.myfirstapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,9 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddFriendActivity extends AppCompatActivity {
 
@@ -31,6 +36,7 @@ public class AddFriendActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private DatabaseReference mUserDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,9 +141,45 @@ public class AddFriendActivity extends AppCompatActivity {
 
             Log.d("TAG", "setDetails: " + username + useremail + useruni);
             TextView userName = (TextView) mView.findViewById(R.id.NameTextView);
-            TextView userEmail = (TextView) mView.findViewById(R.id.emailTextView);
+            final TextView userEmail = (TextView) mView.findViewById(R.id.emailTextView);
             TextView userUni = (TextView) mView.findViewById(R.id.universityTextView);
+            Button addFriend = (Button) mView.findViewById(R.id.addButton);
 
+
+            final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            final String uid = firebaseAuth.getUid();
+            
+
+
+            addFriend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("TAG", "onClick: button clicked");
+                    Query query = FirebaseDatabase.getInstance().getReference("users/").orderByChild("email").equalTo(userEmail.getText().toString());
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                    Log.d("TAG", "onDataChange: " + d.getKey());
+
+                                    DatabaseReference databaseReference = mDatabase.getReference("friends/" + uid);
+                                    databaseReference.child(d.getKey()).setValue(userEmail.getText().toString());
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                }
+            });
 
             userName.setText(username);
             userEmail.setText(useremail);
