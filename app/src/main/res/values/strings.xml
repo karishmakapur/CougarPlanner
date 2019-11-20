@@ -70,6 +70,7 @@
     <string name="edit_your_profile_here">Edit your profile here</string>
     <string name="app_icon">App Icon</string>
     <string name="no_tasks_due_today">No Tasks Due Today</string>
+    <string name="friend_email">Friend Email</string>
     <string-array name="Colors">
             <item>Choose a color</item>
             <item>Pink</item>

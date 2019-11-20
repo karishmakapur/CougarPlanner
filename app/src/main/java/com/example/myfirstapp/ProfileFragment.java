@@ -43,6 +43,7 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -61,27 +62,26 @@ public class ProfileFragment extends Fragment {
     private TextView usersName;
     private TextView noCourses;
 
+    private ImageView profilePictureImage;
+    private RecyclerView FriendRecycerView;
+    private RecyclerView CourseRecyclerView;
 
-
-    ImageView profilePictureImage;
-    RecyclerView FriendRecycerView;
-    RecyclerView CourseRecyclerView;
-
-    ArrayList<Course> courses = new ArrayList<>();
+    private ArrayList<Course> courses = new ArrayList<>();
+    private ArrayList<String> friends = new ArrayList<>();
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    String uid = firebaseAuth.getUid();
+    private String uid = firebaseAuth.getUid();
 
     private DatabaseReference databaseReferenceUsers
             = FirebaseDatabase.getInstance().getReference("users/" + uid);
 
     private DatabaseReference databaseReferenceCourses = FirebaseDatabase.getInstance().getReference("courses/" + uid);
 
-    StorageReference storageReference;
+    private StorageReference storageReference;
     private static final int IMAGE_REQUEST = 234;
     private Uri imageUri;
-    StorageTask uploadTask;
-    String url;
+    private StorageTask uploadTask;
+    private String url;
 
     public ProfileFragment() {
     }
@@ -112,11 +112,11 @@ public class ProfileFragment extends Fragment {
         FriendRecycerView.setHasFixedSize(true);
         FriendRecycerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FriendRecycerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
+        FriendRecycerView.setVisibility(View.VISIBLE);
+        displayFriends();
         CourseRecyclerView.setHasFixedSize(true);
         CourseRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         CourseRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
-
-
 
 
         //get users name and put on screen
@@ -129,12 +129,9 @@ public class ProfileFragment extends Fragment {
                     usersName.setText(name);
 
                     url = dataSnapshot.child("imageURL").getValue().toString();
-                    if(!user.getImageURL().equals("default")) {
+                    if (!user.getImageURL().equals("default")) {
                         Glide.with(getContext()).load(user.getImageURL()).into(profilePictureImage);
                     }
-
-
-
                 }
 
             }
@@ -144,6 +141,7 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
 
         //setting default to show the list of friends
         if (CourseRecyclerView.getVisibility() == View.VISIBLE) {
@@ -170,6 +168,7 @@ public class ProfileFragment extends Fragment {
                     CourseRecyclerView.setVisibility(View.INVISIBLE);
                 }
                 FriendRecycerView.setVisibility(View.VISIBLE);
+                displayFriends();
             }
         });
 
@@ -227,6 +226,101 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    private void displayFriends() {
+        Toast.makeText(getActivity(), "Finding Your Friends", Toast.LENGTH_SHORT).show();
+
+        //get all friend id's
+        Query queryFriends = FirebaseDatabase.getInstance().getReference("friends/" + uid);
+
+        queryFriends.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                        Log.d("TAG", "onDataChange friend id: " + snapshot.getValue());
+                        friends.add(snapshot.getValue().toString());
+
+                        //get all friends users information
+                        //Query queryUser = FirebaseDatabase.getInstance().getReference("users/" + snapshot.getKey());
+
+                        //Log.d("TAG", "displayFriends: " + queryUser);
+
+                        /*queryUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    friends.add(dataSnapshot.getValue(User.class));
+                                    Log.d("TAG", "onDataChange friend User: " + dataSnapshot.getValue(User.class).getName());
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                         */
+                    }//end of for loop
+                    //printing courses to log for debugging purposes
+                    for (int i = 0; i < friends.size(); i++) {
+                        Log.d("TAG", "displayFriends (loop): " + friends.get(i));
+                    }
+                }//end of if statement
+            }//end of snapshot
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+    FirebaseRecyclerAdapter<String, FriendViewHolder> firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<String, FriendViewHolder>(String.class, R.layout.friends_layout, FriendViewHolder.class, queryFriends) {
+
+
+        @Override
+        protected void populateViewHolder(FriendViewHolder friendViewHolder, String s, final int i) {
+
+            Log.d("TAG", "populateViewHolder: friends.size() " + friends.size());
+
+            if (friends.size() == 0) {
+                return;
+            }
+
+            Log.d("TAG", "populateViewHolder: " + friends + " i " + i);
+            friendViewHolder.setDetails(friends.get(i), getContext());
+
+            Log.d("TAG", "populateViewHolder: i " + i);
+
+                /*friendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String courseId = getRef(i).getKey();
+
+                        Intent IntToCourse = new Intent(getActivity(), ViewEditCourseActivity.class);
+                        IntToCourse.putExtra("courseId", courseId);
+                        startActivity(IntToCourse);
+                    }
+                });
+
+                 */
+        }
+
+
+    };
+
+        FriendRecycerView.setAdapter(firebaseRecyclerAdapter2);
+        //firebaseRecyclerAdapter2.notifyDataSetChanged();
+        Log.d("TAG","displayFriends: setting adapter");
+
+
+}
+
     private void chooseImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -235,7 +329,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private String getFileExtension(Uri imageUri){
+    private String getFileExtension(Uri imageUri) {
         ContentResolver contentResolver = getContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         Log.d("TAG", "getFileExtension : " + mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageUri)));
@@ -340,9 +434,7 @@ public class ProfileFragment extends Fragment {
                     for (int i = 0; i < courses.size(); i++) {
                         Log.d("TAG", "displayCourses (loop): " + courses.get(i).getCourseName());
                     }
-                }
-                else
-                {
+                } else {
                     noCourses.setVisibility(View.VISIBLE);
                     CourseRecyclerView.setVisibility(View.INVISIBLE);
                 }

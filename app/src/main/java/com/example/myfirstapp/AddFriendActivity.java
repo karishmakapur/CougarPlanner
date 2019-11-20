@@ -192,7 +192,7 @@ public class AddFriendActivity extends AppCompatActivity {
         public void setDetails(String username, String useremail, String useruni, boolean setButton){
 
             Log.d("TAG", "setDetails: " + username + useremail + useruni);
-            TextView userName = (TextView) mView.findViewById(R.id.NameTextView);
+            final TextView userName = (TextView) mView.findViewById(R.id.NameTextView);
             final TextView userEmail = (TextView) mView.findViewById(R.id.emailTextView);
             TextView userUni = (TextView) mView.findViewById(R.id.universityTextView);
             Button addFriend = (Button) mView.findViewById(R.id.addButton);
@@ -220,7 +220,7 @@ public class AddFriendActivity extends AppCompatActivity {
                                     final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                                     final String uid = firebaseAuth.getUid();
                                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("friends/" + uid);
-                                    databaseReference.child(d.getKey()).setValue(userEmail.getText().toString());
+                                    databaseReference.child(d.getKey()).setValue(userName.getText().toString());
 
                                 }
                             }
