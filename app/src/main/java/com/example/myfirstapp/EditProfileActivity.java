@@ -148,7 +148,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     Toast.makeText(EditProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
                     User user = new User();
-                    user.setName(nameET.getText().toString());
+                    user.setName(nameET.getText().toString().toUpperCase());
                     user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
                     user.setDob(dobET.getText().toString());
                     user.setGradyr(gradYearET.getText().toString());

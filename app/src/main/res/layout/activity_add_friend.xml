@@ -65,4 +65,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="161dp"
+        android:layout_height="105dp"
+        android:text="No user by that name.\n\nSearch is case sensitive.\n\nPlease try again."
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/FriendRecyclerView"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

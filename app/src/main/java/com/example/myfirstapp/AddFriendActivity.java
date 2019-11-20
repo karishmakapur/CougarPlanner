@@ -26,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class AddFriendActivity extends AppCompatActivity {
 
     private Button backButton;
@@ -36,7 +38,11 @@ public class AddFriendActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private DatabaseReference mUserDatabase;
+    private  TextView nodata;
 
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private String uid = firebaseAuth.getUid();
+    ArrayList<String> friendID = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class AddFriendActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         searchBttn = findViewById(R.id.searchButton);
         searchET = findViewById(R.id.searchField);
+        nodata = findViewById(R.id.no_data);
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference("users");
 
@@ -61,6 +68,25 @@ public class AddFriendActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+
+        Query queryFriends = FirebaseDatabase.getInstance().getReference("friends/" + uid);
+
+        queryFriends.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        friendID.add(snapshot.getValue().toString());
+                        Log.d("TAG", "onDataChange friend id: " + snapshot.getValue());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         //handle back button
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -97,9 +123,29 @@ public class AddFriendActivity extends AppCompatActivity {
 
         Toast.makeText(AddFriendActivity.this, "Started Search", Toast.LENGTH_LONG).show();
 
+
         Query firebaseSearchQuery = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
+        firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()){
 
+                    nodata.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.INVISIBLE);
+                }
+                else
+                {
+                    nodata.setVisibility(View.INVISIBLE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         FirebaseRecyclerAdapter<User, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UsersViewHolder>(
 
@@ -114,8 +160,14 @@ public class AddFriendActivity extends AppCompatActivity {
             protected void populateViewHolder(UsersViewHolder viewHolder, User user, int i) {
 
                 Log.d("TAG", "populateViewHolder: " + user.getName());
+                boolean setButton = true;
 
-                viewHolder.setDetails(user.getName(), user.getEmail(), user.getUniname());
+
+                if(friendID.contains(user.getEmail())){
+                    setButton = false;
+                }
+                viewHolder.setDetails(user.getName(), user.getEmail(), user.getUniname(), setButton);
+
 
             }
         };
@@ -137,26 +189,27 @@ public class AddFriendActivity extends AppCompatActivity {
         }
 
         //setting the details for each user
-        public void setDetails(String username, String useremail, String useruni){
+        public void setDetails(String username, String useremail, String useruni, boolean setButton){
 
             Log.d("TAG", "setDetails: " + username + useremail + useruni);
             TextView userName = (TextView) mView.findViewById(R.id.NameTextView);
             final TextView userEmail = (TextView) mView.findViewById(R.id.emailTextView);
             TextView userUni = (TextView) mView.findViewById(R.id.universityTextView);
             Button addFriend = (Button) mView.findViewById(R.id.addButton);
+            Button alreadyFriend = (Button) mView.findViewById(R.id.alreadyFriends);
 
+            if(setButton == false){
+                addFriend.setVisibility(View.INVISIBLE);
+                alreadyFriend.setVisibility(View.VISIBLE);
 
-            final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-            final String uid = firebaseAuth.getUid();
-            
-
+            }
 
             addFriend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("TAG", "onClick: button clicked");
                     Query query = FirebaseDatabase.getInstance().getReference("users/").orderByChild("email").equalTo(userEmail.getText().toString());
+
                     query.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -164,7 +217,9 @@ public class AddFriendActivity extends AppCompatActivity {
                                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                                     Log.d("TAG", "onDataChange: " + d.getKey());
 
-                                    DatabaseReference databaseReference = mDatabase.getReference("friends/" + uid);
+                                    final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                                    final String uid = firebaseAuth.getUid();
+                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("friends/" + uid);
                                     databaseReference.child(d.getKey()).setValue(userEmail.getText().toString());
 
                                 }

@@ -58,4 +58,15 @@
         android:background="@drawable/baseline_add_circle_outline_black_18dp"
         android:clickable="true" />
 
+    <Button
+        android:id="@+id/alreadyFriends"
+        android:layout_width="30dp"
+        android:layout_height="31dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/alreadyfriends"
+        android:clickable="false"
+        android:visibility="invisible"/>
+
 </RelativeLayout>

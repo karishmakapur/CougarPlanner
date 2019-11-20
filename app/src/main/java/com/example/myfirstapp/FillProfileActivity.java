@@ -104,7 +104,7 @@ public class FillProfileActivity extends AppCompatActivity {
                     Toast.makeText(FillProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
                     User user = new User();
-                    user.setName(nameET.getText().toString());
+                    user.setName(nameET.getText().toString().toUpperCase());
                     user.setDob(dobET.getText().toString());
                     user.setEmail(EmailET.getText().toString());
                     user.setGradyr(GradYearET.getText().toString());
