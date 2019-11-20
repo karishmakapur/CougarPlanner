@@ -120,7 +120,7 @@ public class ViewActivity extends AppCompatActivity {
 
 
                 Log.d("TAG", "populateViewHolder: " + tasks);
-                taskViewHolder.setDetails(tasks.get(i), getBaseContext());
+                taskViewHolder.setDetails(tasks.get(i), getBaseContext(), uid);
 
                 taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

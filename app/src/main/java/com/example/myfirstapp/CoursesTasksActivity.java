@@ -31,7 +31,8 @@ public class CoursesTasksActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private String selectedCourseID;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    private String uid = firebaseAuth.getUid();
+    private String uid;// = firebaseAuth.getUid();
+    private String showDetailsFlag;
     private ArrayList<Task> tasks = new ArrayList<>();
     private TextView noTasks;
     private RecyclerView recyclerView;
@@ -45,6 +46,8 @@ public class CoursesTasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_courses_tasks);
 
         selectedCourseID = getIntent().getExtras().get("courseId").toString();
+        uid = getIntent().getExtras().get("userId").toString();
+        showDetailsFlag = getIntent().getExtras().get("showDetailsFlag").toString();
 
         //setting up action bar
         actionBar = getSupportActionBar();
@@ -63,9 +66,10 @@ public class CoursesTasksActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(CoursesTasksActivity.this, "You clicked the cancel button!", Toast.LENGTH_SHORT).show();
-                Intent intToHome = new Intent(CoursesTasksActivity.this, ViewEditCourseActivity.class);
-                intToHome.putExtra("courseId" , selectedCourseID);
-                startActivity(intToHome);
+                //Intent intToHome = new Intent(CoursesTasksActivity.this, ViewEditCourseActivity.class);
+                //intToHome.putExtra("courseId" , selectedCourseID);
+                //startActivity(intToHome);
+                finish();
             }
         });
 
@@ -110,21 +114,24 @@ public class CoursesTasksActivity extends AppCompatActivity {
             protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, final int i) {
 
                 Log.d("TAG", "populateViewHolder CoursesTasksActivity: " + tasks + " i " + i);
-                taskViewHolder.setDetails(tasks.get(i), getBaseContext());
+                taskViewHolder.setDetails(tasks.get(i), getBaseContext(), uid);
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 
-                //show task details
-                taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String taskId = getRef(i).getKey();
+                //show task details only if it's a task under ur actual profile not friends.
+                if(showDetailsFlag.equals("true")){
+                    taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String taskId = getRef(i).getKey();
 
-                        Intent IntToTask = new Intent(CoursesTasksActivity.this, ViewEditTaskActivity.class);
-                        IntToTask.putExtra("taskId", taskId);
-                        startActivity(IntToTask);
-                    }
-                });
+                            Intent IntToTask = new Intent(CoursesTasksActivity.this, ViewEditTaskActivity.class);
+                            IntToTask.putExtra("taskId", taskId);
+                            startActivity(IntToTask);
+                        }
+                    });
+                }
+
 
 
             }

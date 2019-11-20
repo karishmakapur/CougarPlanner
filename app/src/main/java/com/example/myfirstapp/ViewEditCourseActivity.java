@@ -53,7 +53,7 @@ public class ViewEditCourseActivity extends AppCompatActivity {
 
         selectedCourseID = getIntent().getExtras().get("courseId").toString();
 
-        Toast.makeText(this, "Course id" + selectedCourseID, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Course id" + selectedCourseID, Toast.LENGTH_SHORT).show();
         Log.d("TAG", "onCreate: " + selectedCourseID);
 
         //setting up action bar
@@ -193,6 +193,8 @@ public class ViewEditCourseActivity extends AppCompatActivity {
                 Toast.makeText(ViewEditCourseActivity.this, "Showing you the courses tasks", Toast.LENGTH_SHORT).show();
                 Intent intToTask = new Intent(ViewEditCourseActivity.this, CoursesTasksActivity.class);
                 intToTask.putExtra("courseId", selectedCourseID);
+                intToTask.putExtra("userId", uid);
+                intToTask.putExtra("showDetailsFlag", true);
                 startActivity(intToTask);
             }
         });

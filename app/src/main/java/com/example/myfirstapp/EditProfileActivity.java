@@ -34,7 +34,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private Button saveButton;
     private TextView tvDeleteAcct;
     private ActionBar actionBar;
-    private EditText nameET;
+    private TextView nameET;
     private EditText dobET;
     private EditText uniET;
     private Spinner CurrentYearSpinner;
@@ -120,10 +120,6 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
-                if (nameET.getText().toString().isEmpty()) {
-                    nameET.setError("Please enter your name");
-                    nameET.requestFocus();
-                }
                 if (dobET.getText().toString().isEmpty() || !dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")) {
                     dobET.setError("Please enter your date of birth in the format MM/DD/YYYY");
                     dobET.requestFocus();
@@ -148,14 +144,12 @@ public class EditProfileActivity extends AppCompatActivity {
                     Toast.makeText(EditProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
                     User user = new User();
-                    user.setName(nameET.getText().toString().toUpperCase());
                     user.setCurrYear(CurrentYearSpinner.getSelectedItem().toString());
                     user.setDob(dobET.getText().toString());
                     user.setGradyr(gradYearET.getText().toString());
                     user.setUniname(uniET.getText().toString());
 
 
-                    databaseReference.child("name").setValue(nameET.getText().toString());
                     databaseReference.child("currYear").setValue(CurrentYearSpinner.getSelectedItem().toString());
                     databaseReference.child("dob").setValue(dobET.getText().toString());
                     databaseReference.child("gradyr").setValue(gradYearET.getText().toString());

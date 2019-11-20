@@ -61,6 +61,7 @@ public class ProfileFragment extends Fragment {
     private Button editProfileButton;
     private TextView usersName;
     private TextView noCourses;
+    private TextView noFriends;
 
     private ImageView profilePictureImage;
     private RecyclerView FriendRecycerView;
@@ -107,6 +108,7 @@ public class ProfileFragment extends Fragment {
         logoutButton = view.findViewById(R.id.LogoutButton);
         usersName = view.findViewById(R.id.NameTextView);
         noCourses = view.findViewById(R.id.tv_no_data);
+        noFriends = view.findViewById(R.id.tv_no_data2);
 
 
         FriendRecycerView.setHasFixedSize(true);
@@ -166,6 +168,7 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "You clicked the friend button!", Toast.LENGTH_SHORT).show();
                 if (CourseRecyclerView.getVisibility() == View.VISIBLE) {
                     CourseRecyclerView.setVisibility(View.INVISIBLE);
+                    noCourses.setVisibility(View.INVISIBLE);
                 }
                 FriendRecycerView.setVisibility(View.VISIBLE);
                 displayFriends();
@@ -179,6 +182,7 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "You clicked the course button!", Toast.LENGTH_SHORT).show();
                 if (FriendRecycerView.getVisibility() == View.VISIBLE) {
                     FriendRecycerView.setVisibility(View.INVISIBLE);
+                    noFriends.setVisibility(View.INVISIBLE);
                 }
                 CourseRecyclerView.setVisibility(View.VISIBLE);
                 displayCourses();
@@ -227,6 +231,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void displayFriends() {
+        noCourses.setVisibility(View.INVISIBLE);
         Toast.makeText(getActivity(), "Finding Your Friends", Toast.LENGTH_SHORT).show();
 
         //get all friend id's
@@ -241,34 +246,16 @@ public class ProfileFragment extends Fragment {
                         Log.d("TAG", "onDataChange friend id: " + snapshot.getValue());
                         friends.add(snapshot.getValue().toString());
 
-                        //get all friends users information
-                        //Query queryUser = FirebaseDatabase.getInstance().getReference("users/" + snapshot.getKey());
 
-                        //Log.d("TAG", "displayFriends: " + queryUser);
-
-                        /*queryUser.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    friends.add(dataSnapshot.getValue(User.class));
-                                    Log.d("TAG", "onDataChange friend User: " + dataSnapshot.getValue(User.class).getName());
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-
-                         */
                     }//end of for loop
                     //printing courses to log for debugging purposes
                     for (int i = 0; i < friends.size(); i++) {
                         Log.d("TAG", "displayFriends (loop): " + friends.get(i));
                     }
-                }//end of if statement
+                }else{
+                    noFriends.setVisibility(View.VISIBLE);
+                    FriendRecycerView.setVisibility(View.INVISIBLE);
+                }
             }//end of snapshot
 
 
@@ -280,46 +267,47 @@ public class ProfileFragment extends Fragment {
         });
 
 
-    FirebaseRecyclerAdapter<String, FriendViewHolder> firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<String, FriendViewHolder>(String.class, R.layout.friends_layout, FriendViewHolder.class, queryFriends) {
+        FirebaseRecyclerAdapter<String, FriendViewHolder> firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<String, FriendViewHolder>(String.class, R.layout.friends_layout, FriendViewHolder.class, queryFriends) {
 
 
-        @Override
-        protected void populateViewHolder(FriendViewHolder friendViewHolder, String s, final int i) {
+            @Override
+            protected void populateViewHolder(FriendViewHolder friendViewHolder, String s, final int i) {
 
-            Log.d("TAG", "populateViewHolder: friends.size() " + friends.size());
+                Log.d("TAG", "populateViewHolder: friends.size() " + friends.size());
 
-            if (friends.size() == 0) {
-                return;
-            }
+                if (friends.size() == 0) {
+                    return;
+                }
 
-            Log.d("TAG", "populateViewHolder: " + friends + " i " + i);
-            friendViewHolder.setDetails(friends.get(i), getContext());
+                Log.d("TAG", "populateViewHolder: " + friends + " i " + i);
+                friendViewHolder.setDetails(friends.get(i), getContext());
 
-            Log.d("TAG", "populateViewHolder: i " + i);
+                Log.d("TAG", "populateViewHolder: i " + i);
 
-                /*friendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                friendViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String courseId = getRef(i).getKey();
+                        String friendUserId = getRef(i).getKey();
+                        Log.d("TAG", "onClick: " + getRef(i).getKey());
 
-                        Intent IntToCourse = new Intent(getActivity(), ViewEditCourseActivity.class);
-                        IntToCourse.putExtra("courseId", courseId);
-                        startActivity(IntToCourse);
+                        Intent IntToFriendProfile = new Intent(getActivity(), ViewFriendProfileActivity.class);
+                        IntToFriendProfile.putExtra("friendUserId", friendUserId);
+                        startActivity(IntToFriendProfile);
                     }
                 });
 
-                 */
-        }
+
+            }
 
 
-    };
+        };
 
         FriendRecycerView.setAdapter(firebaseRecyclerAdapter2);
         //firebaseRecyclerAdapter2.notifyDataSetChanged();
-        Log.d("TAG","displayFriends: setting adapter");
+        Log.d("TAG", "displayFriends: setting adapter");
 
 
-}
+    }
 
     private void chooseImage() {
         Intent intent = new Intent();
@@ -412,6 +400,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void displayCourses() {
+        noFriends.setVisibility(View.INVISIBLE);
         Toast.makeText(getActivity(), "Finding Your Courses", Toast.LENGTH_LONG).show();
         Query firebaseSearchQuery = databaseReferenceCourses.orderByKey();
 
@@ -451,11 +440,12 @@ public class ProfileFragment extends Fragment {
             @Override
             protected void populateViewHolder(CourseViewHolder courseViewHolder, Course course, final int i) {
 
-                /*if(courses.size() == 0){
+                if(courses.size() == 0){
+                    Toast.makeText(getActivity(), "Error loading your courses.\nPlease come back and try again", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                 */
+
                 Log.d("TAG", "populateViewHolder: " + courses + " i " + i);
                 courseViewHolder.setDetails(courses.get(i), getContext());
 

@@ -13,7 +13,9 @@
         android:roundIcon="@drawable/cougarplanner"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".CoursesTasksActivity"></activity>
+        <activity android:name=".ViewCourseActivity"></activity>
+        <activity android:name=".ViewFriendProfileActivity" />
+        <activity android:name=".CoursesTasksActivity" />
         <activity android:name=".DeleteAccountActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".VerifyEmailActivity" />

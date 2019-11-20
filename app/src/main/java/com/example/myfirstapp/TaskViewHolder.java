@@ -26,7 +26,7 @@ public class TaskViewHolder extends RecyclerView.ViewHolder {
         mView = itemView;
     }
 
-    public void setDetails(Task task, final Context context) {
+    public void setDetails(Task task, final Context context, String uid) {
 
         Log.d("TAG", "setDetails: " + task);
 
@@ -40,9 +40,6 @@ public class TaskViewHolder extends RecyclerView.ViewHolder {
 
         Log.d("TAG", "populateViewHolder: " + task.getTaskName()
                 + task.getCourse() + task.getNotes() + task.getDueDate() + task.getPriorityLevel());
-
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String uid = firebaseAuth.getUid();
 
         Query query = FirebaseDatabase.getInstance().getReference("courses/" + uid + "/" + task.getCourse());
         Log.d("TAG", "setDetails:  have the query");

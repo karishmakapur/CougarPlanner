@@ -131,7 +131,7 @@ public class DashboardFragment extends Fragment {
             protected void populateViewHolder(TaskViewHolder taskViewHolder, Task task, final int i) {
 
                 Log.d("TAG", "populateViewHolder: " + tasks + " i " + i);
-                taskViewHolder.setDetails(tasks.get(i), getContext());
+                taskViewHolder.setDetails(tasks.get(i), getContext(), uid);
 
                 Log.d("TAG", "populateViewHolder: i " + i);
 

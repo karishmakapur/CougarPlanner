@@ -72,17 +72,17 @@
     <string name="no_tasks_due_today">No Tasks Due Today</string>
     <string name="friend_email">Friend Email</string>
     <string-array name="Colors">
-            <item>Choose a color</item>
-            <item>Pink</item>
-            <item>Red</item>
-            <item>Orange</item>
-            <item>Yellow</item>
-            <item>Green</item>
-            <item>Cyan</item>
-            <item>Azure</item>
-            <item>Blue</item>
-            <item>Violet</item>
-            <item>Magenta</item>
+        <item>Choose a color</item>
+        <item>Pink</item>
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Cyan</item>
+        <item>Azure</item>
+        <item>Blue</item>
+        <item>Violet</item>
+        <item>Magenta</item>
     </string-array>
 
     <string-array name="PriorityLevel">
