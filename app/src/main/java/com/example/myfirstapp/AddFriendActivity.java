@@ -118,7 +118,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
     //connect search bar to database for querying when a user wants to search for a friend
     //When user searches for user, and if user exists, then display user
-    // TODO: display user with the option to send friend request
+    //display user with the option to send friend request
     private void firebaseUserSearch(String searchText) {
 
         Toast.makeText(AddFriendActivity.this, "Started Search", Toast.LENGTH_LONG).show();
