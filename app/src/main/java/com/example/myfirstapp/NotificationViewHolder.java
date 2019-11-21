@@ -26,7 +26,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
 
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private String uid = firebaseAuth.getUid();
-    
+
     public NotificationViewHolder(@NonNull View itemView) {
         super(itemView);
         mView = itemView;
@@ -82,7 +82,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
         Button declineButton = mView.findViewById(R.id.declineButton);
         Button acceptButton = mView.findViewById(R.id.acceptButton);
 
-        //TODO: make friends on both sides
+        //make friends on both sides
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +117,7 @@ public class NotificationViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        //TODO: handle decline button (delete request from database nothing else)
+        //handle decline button (delete request from database nothing else)
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,42 +11,35 @@
         android:id="@+id/FriendPicImageView"
         android:layout_width="96dp"
         android:layout_height="96dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/choose_profile_pic"
         android:src="@drawable/profilepic"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058"
         tools:srcCompat="@drawable/profilepic" />
 
     <TextView
         android:id="@+id/FriendNameTextView"
         android:layout_width="106dp"
         android:layout_height="26dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="@string/users_name"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintTop_toBottomOf="@+id/FriendPicImageView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/FriendsFriendRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="353dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unfriendButton"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintTop_toBottomOf="@+id/FriendsfriendButton" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/FriendsCourseRecyclerView"
@@ -56,21 +49,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unfriendButton"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintTop_toBottomOf="@+id/FriendscourseButton"
+        app:layout_constraintVertical_bias="0" />
 
     <Button
         android:id="@+id/FriendscourseButton"
         android:layout_width="205.5dp"
         android:layout_height="35dp"
+        android:layout_marginTop="18dp"
         android:background="#92BAE6"
         android:text="@string/courses"
-        app:layout_constraintBottom_toTopOf="@+id/FriendsFriendRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/unfriendButton" />
 
     <TextView
         android:id="@+id/Friendstv_no_data"
@@ -94,14 +84,11 @@
         android:id="@+id/FriendsfriendButton"
         android:layout_width="205.5dp"
         android:layout_height="35dp"
+        android:layout_marginTop="18dp"
         android:background="#92BAE6"
         android:text="@string/friends"
-        app:layout_constraintBottom_toTopOf="@+id/FriendsFriendRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/unfriendButton" />
 
     <Button
         android:id="@+id/backButton"
@@ -137,13 +124,11 @@
         android:id="@+id/unfriendButton"
         android:layout_width="88dp"
         android:layout_height="29dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="10dp"
         android:background="#6B9BEB"
         android:text="Unfriend"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FriendNameTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/FriendNameTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
