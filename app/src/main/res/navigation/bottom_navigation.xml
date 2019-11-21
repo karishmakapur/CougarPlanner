@@ -15,5 +15,11 @@
         android:name="com.example.myfirstapp.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.myfirstapp.Notifications"
+        android:label="Notifications"
+        tools:layout="@layout/notifications_fragment"/>
+
 
 </navigation>
