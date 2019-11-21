@@ -7,23 +7,107 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Notifications extends Fragment {
 
 
-    public static Notifications newInstance() {
-        return new Notifications();
+
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private String uid = firebaseAuth.getUid();
+    private DatabaseReference FriendRequestRef = FirebaseDatabase.getInstance().getReference("friend_requests" + uid);
+
+    private Button AcceptFriendRequest;
+    private Button DeclineFriendRequest;
+    private RecyclerView NotificationRecyclerView;
+
+    private ArrayList<String> friendRequests = new ArrayList<>();
+
+    private TextView noRequests;
+
+    public Notifications() {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.notifications_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.notifications_fragment, container, false);
+
+
+        NotificationRecyclerView = view.findViewById(R.id.NotificationRecyclerView);
+
+        NotificationRecyclerView.setHasFixedSize(true);
+        NotificationRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        NotificationRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getContext()));
+        NotificationRecyclerView.setVisibility(View.VISIBLE);
+        displayNotifications();
+
+
+        //return inflater.inflate(R.layout.notifications_fragment, container, false);
+
     }
+
+    private void displayNotifications() {
+
+        Query queryFriends = FirebaseDatabase.getInstance().getReference("friend_requests/" + uid);
+
+        queryFriends.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                        friendRequests.add(snapshot.getValue().toString());
+
+
+                    }//end of for loop
+                    //printing courses to log for debugging purposes
+                    for (int i = 0; i < friendRequests.size(); i++) {
+                        Log.d("TAG", "displayFriends (loop): " + friendRequests.get(i));
+                    }
+                }else{
+                    noRequests.setVisibility(View.VISIBLE);
+                    NotificationRecyclerView.setVisibility(View.INVISIBLE);
+                }
+            }//end of snapshot
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+        FirebaseRecyclerAdapter<String, NotificationViewHolder> firebaseRecyclerAdapter2 = new FirebaseRecyclerAdapter<String, FriendViewHolder>(String.class, R.layout.friends_layout, FriendViewHolder.class, queryFriends) {
+
+
+
+    }// end display
+
+
+
+
+
 
 }
 
