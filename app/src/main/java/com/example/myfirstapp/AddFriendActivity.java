@@ -219,8 +219,10 @@ public class AddFriendActivity extends AppCompatActivity {
 
                                     final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                                     final String uid = firebaseAuth.getUid();
-                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("friends/" + uid);
-                                    databaseReference.child(d.getKey()).setValue(userName.getText().toString());
+                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("requests/" + d.getKey());
+
+                                    FriendRequests friendRequest = new FriendRequests(uid);
+                                    databaseReference.child("sender").setValue(friendRequest);
 
                                 }
                             }
