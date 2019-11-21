@@ -48,8 +48,10 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<String> friends = new ArrayList<>();
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private DatabaseReference databaseReference;
     private StorageReference storageReference;
     private static final int IMAGE_REQUEST = 234;
+    private String uID = firebaseAuth.getUid();
     private Uri imageUri;
     private StorageTask uploadTask;
     private String url;
@@ -173,6 +175,27 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: code delete
                 Toast.makeText(ViewFriendProfileActivity.this, "You clicked the unfriend button!", Toast.LENGTH_SHORT).show();
+                Query query = FirebaseDatabase.getInstance().getReference("friends/" + "/" + uID);
+
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                d.getRef().removeValue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                databaseReference.removeValue();
+
+                finish();
             }
         });
 
