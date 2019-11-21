@@ -13,11 +13,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -35,7 +38,7 @@ public class NotificationsFragment extends Fragment {
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private String uid = firebaseAuth.getUid();
     private ArrayList<FriendRequests> friendRequests = new ArrayList<>();
-   // Map<String, String> friendRequests = new HashMap<String, String>();
+    private TextView noData;
 
 
     public static NotificationsFragment newInstance() {
@@ -48,6 +51,7 @@ public class NotificationsFragment extends Fragment {
         View v = inflater.inflate(R.layout.notifications_fragment, container, false);
 
         recyclerView = v.findViewById(R.id.NotificationRecyclerView);
+        noData = v.findViewById(R.id.no_notifications);
 
 
         recyclerView.setHasFixedSize(true);
@@ -80,8 +84,8 @@ public class NotificationsFragment extends Fragment {
                         Log.d("TAG", "onDataChange (loop): " + friendRequests.get(i).getSenderID());
                     }
                 }else{
-                    //noRequests.setVisibility(View.VISIBLE);
-                    //NotificationRecyclerView.setVisibility(View.INVISIBLE);
+                    noData.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.INVISIBLE);
                 }
             }//end of snapshot
 
@@ -121,7 +125,6 @@ public class NotificationsFragment extends Fragment {
                         startActivity(IntToFriendProfile);
                     }
                 });
-
 
             }
 
