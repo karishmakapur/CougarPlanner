@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class ViewFriendProfileActivity extends AppCompatActivity {
 
@@ -75,7 +77,7 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
                 = FirebaseDatabase.getInstance().getReference("users/" + usersId);
 
 
-        DatabaseReference databaseReferenceCourses = FirebaseDatabase.getInstance().getReference("courses/" + usersId);
+        final DatabaseReference databaseReferenceCourses = FirebaseDatabase.getInstance().getReference("courses/" + usersId);
 
         //profile picture image button.
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -175,7 +177,8 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: code delete
                 Toast.makeText(ViewFriendProfileActivity.this, "You clicked the unfriend button!", Toast.LENGTH_SHORT).show();
-                Query query = FirebaseDatabase.getInstance().getReference("friends/" + "/" + uID);
+                DatabaseReference databaseReferenceCurrentUser = FirebaseDatabase.getInstance().getReference("friends/" + uID + "/" + usersId);
+                Query query = databaseReferenceCurrentUser;
 
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -193,7 +196,28 @@ public class ViewFriendProfileActivity extends AppCompatActivity {
                     }
                 });
 
-                databaseReference.removeValue();
+                databaseReferenceCurrentUser.removeValue();
+
+                DatabaseReference databaseReferenceOtherUser = FirebaseDatabase.getInstance().getReference("friends/" + usersId + "/" + uID);
+                Query query2 = databaseReferenceOtherUser;
+
+                query2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot d : dataSnapshot.getChildren()) {
+                                d.getRef().removeValue();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                databaseReferenceOtherUser.removeValue();
 
                 finish();
             }
