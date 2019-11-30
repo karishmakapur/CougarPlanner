@@ -111,7 +111,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     TaskNameET.setError("Please enter a task name");
                     TaskNameET.requestFocus();
                 }
-                if (DueDateET.getText().toString().isEmpty() || !DueDateET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")) {
+                if (DueDateET.getText().toString().isEmpty() || !DueDateET.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d")) {
                     DueDateET.setError("Please the due date in the format MM/DD/YYYY");
                     DueDateET.requestFocus();
                 }
@@ -120,7 +120,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     PrioritySpinner.requestFocus();
                 }
                 if (!TaskNameET.getText().toString().isEmpty()
-                        && (!DueDateET.getText().toString().isEmpty() && DueDateET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
+                        && (!DueDateET.getText().toString().isEmpty() && DueDateET.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d"))
                         && !PrioritySpinner.getSelectedItem().toString().equals("Priority Level")) {
 
                     Toast.makeText(AddTaskActivity.this, "You clicked the submit a task button!", Toast.LENGTH_SHORT).show();

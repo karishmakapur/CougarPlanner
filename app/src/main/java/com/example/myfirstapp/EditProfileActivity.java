@@ -120,7 +120,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // add error handling: Make sure all fields are inputted, else ask user to finish filling out form.
-                if (dobET.getText().toString().isEmpty() || !dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")) {
+                if (dobET.getText().toString().isEmpty() || !dobET.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d")) {
                     dobET.setError("Please enter your date of birth in the format MM/DD/YYYY");
                     dobET.requestFocus();
                 }
@@ -137,7 +137,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     uniET.requestFocus();
                 }
                 if (!nameET.getText().toString().isEmpty()
-                        && (!dobET.getText().toString().isEmpty() && dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
+                        && (!dobET.getText().toString().isEmpty() && dobET.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d"))
                         && !gradYearET.getText().toString().isEmpty()
                         && !CurrentYearSpinner.getSelectedItem().toString().equals("Current Year") && !uniET.getText().toString().isEmpty()) {
 

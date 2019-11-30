@@ -159,7 +159,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                     taskName.setError("Please enter a task name");
                     taskName.requestFocus();
                 }
-                if (editduedate.getText().toString().isEmpty() || !editduedate.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")) {
+                if (editduedate.getText().toString().isEmpty() || !editduedate.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d")) {
                     editduedate.setError("Please the due date in the format MM/DD/YYYY");
                     editduedate.requestFocus();
                 }
@@ -168,7 +168,7 @@ public class ViewEditTaskActivity extends AppCompatActivity {
                     changepriority.requestFocus();
                 }
                 if (!taskName.getText().toString().isEmpty()
-                        && (!editduedate.getText().toString().isEmpty() && editduedate.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
+                        && (!editduedate.getText().toString().isEmpty() && editduedate.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d"))
                         && !changepriority.getSelectedItem().toString().equals("Priority Level")) {
 
                     Toast.makeText(ViewEditTaskActivity.this, "You clicked the save a task button!", Toast.LENGTH_SHORT).show();

@@ -77,7 +77,15 @@ public class ScheduleActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String date = (month + 1) + "/" + dayOfMonth + "/" + year;
+                int digits = Integer.toString(dayOfMonth).trim().length();
+                String date;
+                if(digits == 1){
+                    date = (month + 1) + "/0" + dayOfMonth + "/" + year;
+                }
+                else{
+                    date = (month + 1) + "/" + dayOfMonth + "/" + year;
+                }
+
                 Intent intent = new Intent(ScheduleActivity.this, ViewActivity.class);
                 intent.putExtra("date", date);
                 startActivity(intent);

@@ -76,7 +76,7 @@ public class FillProfileActivity extends AppCompatActivity {
                     nameET.setError("Please enter your name");
                     nameET.requestFocus();
                 }
-                if(dobET.getText().toString().isEmpty() || !dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})")){
+                if(dobET.getText().toString().isEmpty() || !dobET.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d")){
                     dobET.setError("Please enter your date of birth in the format MM/DD/YYYY");
                     dobET.requestFocus();
                 }
@@ -97,14 +97,15 @@ public class FillProfileActivity extends AppCompatActivity {
                     UniET.requestFocus();
                 }
                 if(!nameET.getText().toString().isEmpty()
-                        && (!dobET.getText().toString().isEmpty() && dobET.getText().toString().matches("^((0|1)\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})"))
+                        && (!dobET.getText().toString().isEmpty() && dobET.getText().toString().matches("(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d"))
                         && !EmailET.getText().toString().isEmpty() && !GradYearET.getText().toString().isEmpty()
                         && !CurrentYearSpinner.getSelectedItem().toString().equals("Current Year") && !UniET.getText().toString().isEmpty()){
 
                     Toast.makeText(FillProfileActivity.this, "You clicked the save button!", Toast.LENGTH_SHORT).show();
 
                     User user = new User();
-                    user.setName(nameET.getText().toString().toUpperCase());
+                    String output = nameET.getText().toString().substring(0, 1).toUpperCase() + nameET.getText().toString().substring(1);
+                    user.setName(output);
                     user.setDob(dobET.getText().toString());
                     user.setEmail(EmailET.getText().toString());
                     user.setGradyr(GradYearET.getText().toString());
